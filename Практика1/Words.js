@@ -33,6 +33,14 @@ function findFirst(splitWords) {
 }
 
 function orderString() {
-    let splitWords = splitString(document.getElementById("stringInput").value);
-    console.log(findFirst(splitWords));
+    let splitWords = splitString(document.getElementById("stringInput").value), wordsCount = splitWords.length;
+    let result = "";
+    for (let i = 0; i <  wordsCount; i++) {
+        let minWord = findFirst(splitWords), index = splitWords.indexOf(minWord);
+        result += minWord + " ";
+        splitWords.splice(index, 1);
+    }
+    document.getElementById("yourString").innerHTML = "Ваша строка: " + document.getElementById("stringInput").value;
+    document.getElementById("resultString").innerHTML = "Результат: " + result;
+    console.log(result);
 }
