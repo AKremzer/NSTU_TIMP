@@ -103,4 +103,53 @@ function getPossibleMoves() {
     getPossibleJumps(); 
 }
 
-//TODO:  getPossibleJumps();
+function getPossibleJumps() {
+    let row = parseInt(selectedPiece.indexOfBoardPiece[5]) - 1;
+    let cell = parseInt(selectedPiece.indexOfBoardPiece[7]) - 1;
+    let result = [];
+    if (selectedPiece.pieceId < 12) {
+        if((isInBorders(row + 2, cell + 2)) && (boardArray[row + 2][cell + 2] == null) && (boardArray[row + 1][cell + 1] != null))
+            if (boardArray[row + 1][cell + 1] > 11)
+                result.push(`cell-${row + 3}-${cell + 3}`);
+        if((isInBorders(row + 2, cell - 2)) && (boardArray[row + 2][cell - 2] == null) && (boardArray[row + 1][cell - 1] != null))
+            if (boardArray[row + 1][cell - 1] > 11)
+                result.push(`cell-${row + 3}-${cell - 1}`);
+        if(selectedPiece.isKing) {
+            if((isInBorders(row - 2, cell + 2)) && (boardArray[row - 2][cell + 2] == null) && (boardArray[row - 1][cell + 1] != null))
+                if (boardArray[row - 1][cell + 1] > 11)
+                    result.push(`cell-${row - 1}-${cell + 3}`);
+            if((isInBorders(row - 2, cell - 2)) && (boardArray[row - 2][cell - 2] == null) && (boardArray[row - 1][cell - 1] != null))
+                if (boardArray[row - 1][cell - 1] > 11)
+                    result.push(`cell-${row - 1}-${cell - 1}`);
+        }
+    }
+    if (selectedPiece.pieceId > 11) {
+        if((isInBorders(row - 2, cell + 2)) && (boardArray[row - 2][cell + 2] == null) && (boardArray[row - 1][cell + 1] != null))
+            if (boardArray[row - 1][cell + 1] < 12)
+                result.push(`cell-${row - 1}-${cell + 3}`);
+        if((isInBorders(row - 2, cell - 2)) && (boardArray[row - 2][cell - 2] == null) && (boardArray[row - 1][cell - 1] != null))
+            if (boardArray[row - 1][cell - 1] < 12)
+                result.push(`cell-${row - 1}-${cell - 1}`);
+        if(selectedPiece.isKing) {
+            if((isInBorders(row + 2, cell + 2)) && (boardArray[row + 2][cell + 2] == null) && (boardArray[row + 1][cell + 1] != null))
+                if (boardArray[row + 1][cell + 1] < 12)
+                    result.push(`cell-${row + 3}-${cell + 3}`);
+            if((isInBorders(row + 2, cell - 2)) && (boardArray[row + 2][cell - 2] == null) && (boardArray[row + 1][cell - 1] != null))
+                if (boardArray[row + 1][cell - 1] < 12)
+                    result.push(`cell-${row + 3}-${cell - 1}`);
+        }
+    }
+    for(let i = 0; i < result.length; i++)
+        selectedPiece.possibleMoves.push(result[i]);
+    document.getElementById(selectedPiece.pieceId).style.outline = "3px solid yellow";
+    enableCells();
+}
+
+function enableCells() {
+    for (let i = 0; i < selectedPiece.possibleMoves.length; i++) {
+        let row = parseInt(selectedPiece.possibleMoves[i][5]) - 1;
+        let cell = parseInt(selectedPiece.possibleMoves[i][7]) - 1;
+        boardCells[row * 8 + cell].innerHTML = `<div class="dot"></div>`;
+        boardCells[row * 8 + cell].setAttribute("onclick", `makeMove('cell-${row + 1}-${cell + 1}')`);
+    }
+}
