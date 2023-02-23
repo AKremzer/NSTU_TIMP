@@ -58,6 +58,29 @@ function getPlayerPieces() {
     if (turn == "white")
         playerPieces = whitePieces;
     else playerPieces = blackPieces;
+    removeCellOnClicks();
+    resetBorders();
+}
+
+function removeCellOnClicks() {
+    for (let i = 0; i < boardCells.length; i++) {
+        boardCells[i].removeAttribute("onclick");
+    }
+}
+
+function resetBorders() {
+    for (let i = 0; i < playerPieces.length; i++) {
+        playerPieces[i].style.outline = 0;
+    }
+    
+    for (let i = 0; i < selectedPiece.possibleMoves.length; i++) {
+        let row = parseInt(selectedPiece.possibleMoves[i][5]) - 1;
+        let cell = parseInt(selectedPiece.possibleMoves[i][7]) - 1;
+        boardCells[row * 8 + cell].innerHTML = "";
+    }
+    
+    resetSelectedPieceProperties();
+    getSelectedPiece();
 }
 
 function resetSelectedPieceProperties() {
@@ -152,4 +175,80 @@ function enableCells() {
         boardCells[row * 8 + cell].innerHTML = `<div class="dot"></div>`;
         boardCells[row * 8 + cell].setAttribute("onclick", `makeMove('cell-${row + 1}-${cell + 1}')`);
     }
+}
+
+function makeMove(cellChosen) {
+    document.getElementById(selectedPiece.pieceId).remove();
+    let row = parseInt(selectedPiece.indexOfBoardPiece[5]) - 1;
+    let cell = parseInt(selectedPiece.indexOfBoardPiece[7]) - 1;
+    boardCells[row * 8 + cell].innerHTML = "";
+    let checkerData = selectedPiece.pieceId < 12 ? (selectedPiece.isKing ? `<div class="checker black-piece king" id="${selectedPiece.pieceId}"></div>` : 
+                                                                           `<div class="checker black-piece" id="${selectedPiece.pieceId}"></div>`)
+                                                 : (selectedPiece.isKing ? `<div class="checker white-piece king" id="${selectedPiece.pieceId}"></div>` : 
+                                                                           `<div class="checker white-piece" id="${selectedPiece.pieceId}"></div>`);
+    let rowTo = parseInt(cellChosen[5]) - 1;
+    let cellTo = parseInt(cellChosen[7]) - 1;
+    boardCells[rowTo * 8 + cellTo].innerHTML = checkerData;
+    
+    let checkerEaten = null;
+    if((Math.abs(row - rowTo) == 2) || (Math.abs(cell - cellTo) == 2)) {
+        checkerEaten = rowTo - row > 0 ? (cellTo - cell > 0 ? `cell-${rowTo}-${cellTo}` : `cell-${rowTo}-${cellTo + 2}`)
+                                       : (cellTo - cell > 0 ? `cell-${rowTo + 2}-${cellTo}` : `cell-${rowTo + 2}-${cellTo + 2}`);
+    }
+    modifyBoard(selectedPiece.indexOfBoardPiece, cellChosen, checkerEaten);
+}
+
+function modifyBoard(selectedCell, nextCell, checkerEaten) {
+    let row = parseInt(selectedCell[5]) - 1;
+    let cell = parseInt(selectedCell[7]) - 1;
+    let rowTo = parseInt(nextCell[5]) - 1;
+    let cellTo = parseInt(nextCell[7]) - 1;
+    
+    boardArray[row][cell] = null;
+    boardArray[rowTo][cellTo] = parseInt(selectedPiece.pieceId);
+    
+    if (turn == "black" && selectedPiece.pieceId < 12 && rowTo == 7) {
+        document.getElementById(selectedPiece.pieceId).classList.add("king")
+    }
+    if (turn == "white" && selectedPiece.pieceId >11 && rowTo == 0) {
+        document.getElementById(selectedPiece.pieceId).classList.add("king");
+    }
+    if (checkerEaten != null) {
+        let eatenRow = parseInt(checkerEaten[5]) - 1;
+        let eatenCell = parseInt(checkerEaten[7]) - 1;
+        boardArray[eatenRow][eatenCell] = null;
+        boardCells[eatenRow * 8 + eatenCell].innerHTML = "";
+        if (turn == "black" && selectedPiece.pieceId < 12)
+            whiteScore--;
+        if (turn == "white" && selectedPiece.pieceId > 11)
+            blackScore--
+    }
+    let dotChildren = Array.from(document.getElementsByClassName("dot"));
+    dotChildren.forEach(child => {
+    child.remove();
+    });
+    resetSelectedPieceProperties();
+    removeCellOnClicks();
+    removePiecesOnClicks();
+}
+
+function removePiecesOnClicks() {
+    if (turn == "white")
+        for (let i = 0; i < whitePieces.length; i++)
+            whitePieces[i].removeEventListener("click", getPlayerPieces);
+    else for (let i = 0; i < blackPieces.length; i++)
+            blackPieces[i].removeEventListener("click", getPlayerPieces);
+    changePlayer();
+}
+
+function changePlayer() {
+    if(turn == "white") {
+        turn = "black";
+        document.getElementById("move").innerHTML = "Ход черных";
+    }
+    else {
+        turn = "white";
+        document.getElementById("move").innerHTML = "Ход белых";
+    }
+    giveOnClicks();
 }
