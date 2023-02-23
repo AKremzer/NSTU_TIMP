@@ -81,4 +81,26 @@ function getSelectedPiece() {
     getPossibleMoves();
 }
 
-//TODO: getPossibleMoves();
+function isInBorders(row, cell) {
+    return row > -1 && row < 8 && cell > -1 && cell < 8;
+}
+
+function getPossibleMoves() {
+    let row = parseInt(selectedPiece.indexOfBoardPiece[5]) - 1;
+    let cell = parseInt(selectedPiece.indexOfBoardPiece[7]) - 1;
+    if((selectedPiece.pieceId < 12) || ((selectedPiece.pieceId > 11) && (selectedPiece.isKing == true))){
+        if((isInBorders(row + 1, cell - 1)) && (boardArray[row + 1][cell - 1] == null))
+            selectedPiece.possibleMoves.push(`cell-${row + 2}-${cell}`);
+        if((isInBorders(row + 1, cell + 1)) && (boardArray[row + 1][cell + 1] == null))
+            selectedPiece.possibleMoves.push(`cell-${row + 2}-${cell + 2}`);
+    }
+    if((selectedPiece.pieceId > 11) || ((selectedPiece.pieceId < 12) && (selectedPiece.isKing == true))){
+        if((isInBorders(row - 1, cell - 1)) && (boardArray[row - 1][cell - 1] == null))
+            selectedPiece.possibleMoves.push(`cell-${row}-${cell}`);
+        if((isInBorders(row - 1, cell + 1)) && (boardArray[row - 1][cell + 1] == null))
+            selectedPiece.possibleMoves.push(`cell-${row}-${cell + 2}`);
+    }
+    getPossibleJumps(); 
+}
+
+//TODO:  getPossibleJumps();
