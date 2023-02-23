@@ -1,35 +1,40 @@
 body {
-    background-color: burlywood;
+    background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) ), url("back.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     text-align: center;
 }
 
 #board {
     padding: 15px;
     display: inline-block;
-    background-color: saddlebrown;
+    background-color: #984e2b;
+}
+
+#score {
+    font-family: monospace;
+    font-size: 1.5vw;
 }
 
 .cell {
     display: inline-block;
-    width: 8vw;
-    height: 8vw;
+    width: 5vw;
+    height: 5vw;
     margin: 0px;
-    max-height: 11vh;
-    max-width: 11vh;
+    max-height: 9.5vh;
+    max-width: 9.5vh;
     margin-left: auto;
     margin-right: auto;
 }
 
 .black {
-    background-color: #EE4E34;
+    background-color: #d48a67;
 }
 
 .white {
     background-color: #FCEDDA;
-}
-
-.king {
-    background-image: url('crown.png');
 }
 
 .checker {
@@ -45,4 +50,20 @@ body {
 
 .white-piece {
     background-color: white;
+}
+
+.white-piece.king {
+    background: radial-gradient(circle, rgba(231,209,7,1) 0%, rgba(255,255,255,1) 50%);
+}
+
+.black-piece.king {
+    background: radial-gradient(circle, rgba(231,209,7,1) 0%, rgba(0,0,0,1) 50%);
+}
+
+.dot {
+    margin: 40%;
+    border-radius: 50%;
+    height: 20%;
+    width: 20%;
+    background-color: yellow;
 }
