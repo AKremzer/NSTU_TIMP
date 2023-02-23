@@ -29,3 +29,56 @@ function buildBoard() {
     }
     return result;
 }
+
+var boardCells = document.getElementsByClassName("cell");
+let whitePieces = document.getElementsByClassName("white-piece");
+let blackPieces = document.getElementsByClassName("black-piece");
+
+let turn = "white";
+let whiteScore = 12; // добавить условие выигрыша
+let blackScore = 12;
+let playerPieces = whitePieces;
+
+var selectedPiece = {
+    pieceId: -1,
+    indexOfBoardPiece: "",
+    isKing: false,
+    possibleMoves: []
+}
+
+function giveOnClicks() {
+    if (turn == "white")
+        for (let i = 0; i < whitePieces.length; i++)
+            whitePieces[i].addEventListener("click", getPlayerPieces);
+    else for (let i = 0; i < blackPieces.length; i++)
+            blackPieces[i].addEventListener("click", getPlayerPieces);
+}
+
+function getPlayerPieces() {
+    if (turn == "white")
+        playerPieces = whitePieces;
+    else playerPieces = blackPieces;
+}
+
+function resetSelectedPieceProperties() {
+    selectedPiece.pieceId = -1;
+    selectedPiece.indexOfBoardPiece = "",
+    selectedPiece.isKing = false,
+    selectedPiece.possibleMoves = []
+}
+
+function getSelectedPiece() {
+    let id = parseInt(event.target.id);
+    let cell = "";
+    selectedPiece.pieceId = id;
+    for (let i = 0; i < 8; i++)
+        for (let j = 0; j < 8; j++) {
+            if (boardArray[i][j] == id)
+                cell = `cell-${i + 1}-${j + 1}`;
+        }
+    selectedPiece.indexOfBoardPiece = cell;
+    selectedPiece.isKing = document.getElementById(selectedPiece.pieceId).classList.contains("king") ? true : false;
+    getPossibleMoves();
+}
+
+//TODO: getPossibleMoves();
