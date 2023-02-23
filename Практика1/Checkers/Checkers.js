@@ -1,4 +1,5 @@
 var piecesCounter = 0
+var jumpPossible = false
 
 var boardArray = [
     [ null, 0, null, 1, null, 2, null, 3 ],
@@ -72,13 +73,6 @@ function resetBorders() {
     for (let i = 0; i < playerPieces.length; i++) {
         playerPieces[i].style.outline = 0;
     }
-    
-    for (let i = 0; i < selectedPiece.possibleMoves.length; i++) {
-        let row = parseInt(selectedPiece.possibleMoves[i][5]) - 1;
-        let cell = parseInt(selectedPiece.possibleMoves[i][7]) - 1;
-        boardCells[row * 8 + cell].innerHTML = "";
-    }
-    
     resetSelectedPieceProperties();
     getSelectedPiece();
 }
@@ -123,10 +117,11 @@ function getPossibleMoves() {
         if((isInBorders(row - 1, cell + 1)) && (boardArray[row - 1][cell + 1] == null))
             selectedPiece.possibleMoves.push(`cell-${row}-${cell + 2}`);
     }
-    getPossibleJumps(); 
+    getPossibleJumps("act"); 
 }
 
-function getPossibleJumps() {
+function getPossibleJumps(action) {
+    jumpPossible = false;
     let row = parseInt(selectedPiece.indexOfBoardPiece[5]) - 1;
     let cell = parseInt(selectedPiece.indexOfBoardPiece[7]) - 1;
     let result = [];
@@ -162,10 +157,16 @@ function getPossibleJumps() {
                     result.push(`cell-${row + 3}-${cell - 1}`);
         }
     }
-    for(let i = 0; i < result.length; i++)
-        selectedPiece.possibleMoves.push(result[i]);
-    document.getElementById(selectedPiece.pieceId).style.outline = "3px solid yellow";
-    enableCells();
+    if(action == "act") {
+        for(let i = 0; i < result.length; i++)
+            selectedPiece.possibleMoves.push(result[i]);
+        if(result.length > 0) jumpPossible = true;
+        document.getElementById(selectedPiece.pieceId).style.outline = "3px solid yellow";
+        enableCells();
+    }
+    else if(action == "check") {
+        if(result.length > 0) jumpPossible = true;
+    }
 }
 
 function enableCells() {
@@ -227,7 +228,7 @@ function modifyBoard(selectedCell, nextCell, checkerEaten) {
     dotChildren.forEach(child => {
     child.remove();
     });
-    resetSelectedPieceProperties();
+    if(!jumpPossible) resetSelectedPieceProperties();
     removeCellOnClicks();
     removePiecesOnClicks();
 }
@@ -242,13 +243,30 @@ function removePiecesOnClicks() {
 }
 
 function changePlayer() {
-    if(turn == "white") {
-        turn = "black";
-        document.getElementById("move").innerHTML = "Ход черных";
+    if(jumpPossible) {
+        selectedPiece.possibleMoves = [];
+        selectedPiece.indexOfBoardPiece = document.getElementById(selectedPiece.pieceId).parentElement.id;
+        getPossibleJumps("check");
+    }
+    if(jumpPossible) {
+        if (turn == "white")
+        for (let i = 0; i < whitePieces.length; i++)
+            if(whitePieces[i].id == selectedPiece.pieceId)
+                whitePieces[i].addEventListener("click", getPlayerPieces);
+        else for (let i = 0; i < blackPieces.length; i++)
+            if(blackPieces[i].id == selectedPiece.pieceId)
+                blackPieces[i].addEventListener("click", getPlayerPieces);
+        getPossibleJumps("act");
     }
     else {
-        turn = "white";
-        document.getElementById("move").innerHTML = "Ход белых";
-    }
-    giveOnClicks();
+        if(turn == "white") {
+            turn = "black";
+            document.getElementById("move").innerHTML = "Ход черных";
+        }
+        else {
+            turn = "white";
+            document.getElementById("move").innerHTML = "Ход белых";
+        }
+        giveOnClicks();
+    } 
 }
