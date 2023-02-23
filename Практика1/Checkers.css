@@ -1,0 +1,48 @@
+body {
+    background-color: burlywood;
+    text-align: center;
+}
+
+#board {
+    padding: 15px;
+    display: inline-block;
+    background-color: saddlebrown;
+}
+
+.cell {
+    display: inline-block;
+    width: 8vw;
+    height: 8vw;
+    margin: 0px;
+    max-height: 11vh;
+    max-width: 11vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.black {
+    background-color: #EE4E34;
+}
+
+.white {
+    background-color: #FCEDDA;
+}
+
+.king {
+    background-image: url('crown.png');
+}
+
+.checker {
+    margin: 10%;
+    border-radius: 50%;
+    height: 80%;
+    width: 80%;
+}
+
+.black-piece {
+    background-color: black;
+}
+
+.white-piece {
+    background-color: white;
+}
