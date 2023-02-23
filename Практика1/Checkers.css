@@ -45,7 +45,7 @@ body {
 }
 
 .black-piece {
-    background-color: black;
+    background-color: #69361e;
 }
 
 .white-piece {
@@ -57,7 +57,7 @@ body {
 }
 
 .black-piece.king {
-    background: radial-gradient(circle, rgba(231,209,7,1) 0%, rgba(0,0,0,1) 50%);
+    background: radial-gradient(circle, rgba(231,209,7,1) 0%, #69361e 50%);
 }
 
 .dot {
