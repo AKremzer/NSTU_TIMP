@@ -59,11 +59,17 @@ body {
 }
 
 .white-piece.king {
-    background: radial-gradient(circle, rgba(231,209,7,1) 0%, rgba(255,255,255,1) 50%);
+    background-image: url("Images/crown.png"),  url("Images/white.png");
+    background-position: center, center;
+    background-size: 50%, cover;
+    background-repeat: no-repeat;
 }
 
 .black-piece.king {
-    background: radial-gradient(circle, rgba(231,209,7,1) 0%, #69361e 50%);
+    background-image: url("Images/crown.png"),  url("Images/black.png");
+    background-position: center, center;
+    background-size: 50%, cover;
+    background-repeat: no-repeat;
 }
 
 .dot {
