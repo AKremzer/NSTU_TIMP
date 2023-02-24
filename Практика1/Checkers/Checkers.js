@@ -156,6 +156,10 @@ function resetBorders() {
     for (let i = 0; i < playerPieces.length; i++) {
         playerPieces[i].style.outline = 0;
     }
+    let dotChildren = Array.from(document.getElementsByClassName("dot"));
+    dotChildren.forEach(child => {
+    child.remove();
+    });
     resetSelectedPieceProperties();
     getSelectedPiece();
 }
@@ -169,6 +173,7 @@ function resetSelectedPieceProperties() {
 }
 
 function getSelectedPiece() {
+    
     let id = parseInt(event.target.id);
     let cell = "";
     selectedPiece.pieceId = id;
