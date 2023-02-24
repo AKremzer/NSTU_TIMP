@@ -1,5 +1,4 @@
 var piecesCounter = 0
-var jumpPossible = false
 
 var boardArray = [
     [ null, 0, null, 1, null, 2, null, 3 ],
@@ -32,13 +31,13 @@ function buildBoard() {
 }
 
 var boardCells = document.getElementsByClassName("cell");
-let whitePieces = document.getElementsByClassName("white-piece");
-let blackPieces = document.getElementsByClassName("black-piece");
+var whitePieces = document.getElementsByClassName("white-piece");
+var blackPieces = document.getElementsByClassName("black-piece");
 
-let turn = "white";
-let whiteScore = 12; // добавить условие выигрыша
-let blackScore = 12;
-let playerPieces = whitePieces;
+var turn = "white";
+var whiteScore = 12; // добавить условие выигрыша
+var blackScore = 12;
+var playerPieces = whitePieces;
 
 class Piece {
   constructor(id, index, king, moves, jump) {
@@ -77,7 +76,6 @@ function getPossibleMoves(piece) {
 }
 
 function getPossibleJumps(piece) {
-    jumpPossible = false;
     let row = parseInt(piece.indexOfBoardPiece[5]) - 1;
     let cell = parseInt(piece.indexOfBoardPiece[7]) - 1;
     let result = [];
@@ -114,7 +112,6 @@ function getPossibleJumps(piece) {
         }
     }
     if(result.length > 0) {
-        jumpPossible = true;
         piece.hasJumps = true;
         piece.possibleMoves = result;
     }
@@ -307,4 +304,3 @@ function changePlayer() {
         turn == "white" ? giveOnClicks(whitePieces) : giveOnClicks(blackPieces);
     } 
 }
-
