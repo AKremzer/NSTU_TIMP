@@ -270,6 +270,14 @@ function removePiecesOnClicks() {
 }
 
 function changePlayer() {
+    if(whiteScore == 0) {
+        document.getElementById("move").innerHTML = "Победа черных";
+        return;
+    }
+    else if(blackScore == 0) {
+        document.getElementById("move").innerHTML = "Победа белых";
+        return;
+    }
     if(selectedPiece.hasJumps) {
         selectedPiece.possibleMoves = [];
         selectedPiece.hasJumps = false;
@@ -299,3 +307,4 @@ function changePlayer() {
         turn == "white" ? giveOnClicks(whitePieces) : giveOnClicks(blackPieces);
     } 
 }
+
