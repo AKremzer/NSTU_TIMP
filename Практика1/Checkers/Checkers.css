@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) ), url("back.jpg");
+    background-image: url("Images/back.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -10,11 +10,13 @@ body {
 #board {
     padding: 15px;
     display: inline-block;
-    background-color: #984e2b;
+    background-image: url("Images/board.jpg");
 }
 
 #score {
-    font-family: monospace;
+    font-family: Georgia, serif;
+    text-shadow: 3px 4px 7px rgba(0,0,0,0.8);
+    color: white;
     font-size: 1.5vw;
 }
 
@@ -30,11 +32,11 @@ body {
 }
 
 .black {
-    background-color: #d48a67;
+    background-image: url("Images/blacktile.png");
 }
 
 .white {
-    background-color: #FCEDDA;
+    background-image: url("Images/whitetile.png");
 }
 
 .checker {
@@ -45,11 +47,15 @@ body {
 }
 
 .black-piece {
-    background-color: #69361e;
+    background-image: url("Images/black.png");
+    background-position: center;
+    background-size: cover;
 }
 
 .white-piece {
-    background-color: white;
+    background-image: url("Images/white.png");
+    background-position: center;
+    background-size: cover;
 }
 
 .white-piece.king {
