@@ -120,50 +120,28 @@ function getPossibleJumps(piece) {
     }
 }
 
-function giveOnClicks() {
+function giveOnClicks(pieces) {
     disableNormalMoves = false;
-    if (turn == "white") {
-        for (let i = 0; i < whitePieces.length; i++) {
-            let cell = document.getElementById(whitePieces[i].id).parentElement.id;
-            let isKing = document.getElementById(whitePieces[i].id).classList.contains("king") ? true : false;
-            let moves = [];
-            let piece = new Piece(whitePieces[i].id, cell, isKing, moves, false);
-            getPossibleMoves(piece);
-            if(piece.hasJumps) disableNormalMoves = true;
-            piecesMoves.push(piece);
-        }
-        if (disableNormalMoves) {
-            for (let i = 0; i < piecesMoves.length; i++)
-                if(piecesMoves[i].hasJumps)
-                    document.getElementById(piecesMoves[i].pieceId).addEventListener("click", getPlayerPieces);
-        }
-        else for (let i = 0; i < whitePieces.length; i++)
-            whitePieces[i].addEventListener("click", getPlayerPieces);
+    for (let i = 0; i < pieces.length; i++) {
+        let cell = document.getElementById(pieces[i].id).parentElement.id;
+        let isKing = document.getElementById(pieces[i].id).classList.contains("king") ? true : false;
+        let moves = [];
+        let piece = new Piece(pieces[i].id, cell, isKing, moves, false);
+        getPossibleMoves(piece);
+        if(piece.hasJumps) disableNormalMoves = true;
+        piecesMoves.push(piece);
     }
-    else {
-        for (let i = 0; i < blackPieces.length; i++) {
-            let cell = document.getElementById(blackPieces[i].id).parentElement.id;
-            let isKing = document.getElementById(blackPieces[i].id).classList.contains("king") ? true : false;
-            let moves = [];
-            let piece = new Piece(blackPieces[i].id, cell, isKing, moves, false);
-            getPossibleMoves(piece);
-            if(piece.hasJumps) disableNormalMoves = true;
-            piecesMoves.push(piece);
-        }
-        if (disableNormalMoves) {
-            for (let i = 0; i < piecesMoves.length; i++)
-                if(piecesMoves[i].hasJumps)
-                    document.getElementById(piecesMoves[i].pieceId).addEventListener("click", getPlayerPieces);
-        }
-        else for (let i = 0; i < blackPieces.length; i++)
-            blackPieces[i].addEventListener("click", getPlayerPieces);
+    if (disableNormalMoves) {
+        for (let i = 0; i < piecesMoves.length; i++)
+            if(piecesMoves[i].hasJumps)
+                document.getElementById(piecesMoves[i].pieceId).addEventListener("click", getPlayerPieces);
     }
+    else for (let i = 0; i < pieces.length; i++)
+        pieces[i].addEventListener("click", getPlayerPieces);
 }
 
 function getPlayerPieces() {
-    if (turn == "white")
-        playerPieces = whitePieces;
-    else playerPieces = blackPieces;
+    playerPieces = (turn == "white") ? whitePieces : blackPieces;
     removeCellOnClicks();
     resetBorders();
 }
@@ -313,6 +291,6 @@ function changePlayer() {
             document.getElementById("move").innerHTML = "Ход белых";
         }
         piecesMoves = [];
-        giveOnClicks();
+        turn == "white" ? giveOnClicks(whitePieces) : giveOnClicks(blackPieces);
     } 
 }
