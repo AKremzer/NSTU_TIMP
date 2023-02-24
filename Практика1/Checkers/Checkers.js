@@ -40,19 +40,124 @@ let whiteScore = 12; // добавить условие выигрыша
 let blackScore = 12;
 let playerPieces = whitePieces;
 
-var selectedPiece = {
-    pieceId: -1,
-    indexOfBoardPiece: "",
-    isKing: false,
-    possibleMoves: []
+class Piece {
+  constructor(id, index, king, moves, jump) {
+    this.pieceId = id;
+    this.indexOfBoardPiece = index;
+    this.isKing = king;
+    this.possibleMoves = moves;
+    this.hasJumps = jump;
+  }
+}
+    
+var selectedPiece = new Piece(-1, "", false, [], false);
+var piecesMoves = [];
+var disableNormalMoves = false;
+
+function isInBorders(row, cell) {
+    return row > -1 && row < 8 && cell > -1 && cell < 8;
+}
+
+function getPossibleMoves(piece) {
+    let row = parseInt(piece.indexOfBoardPiece[5]) - 1;
+    let cell = parseInt(piece.indexOfBoardPiece[7]) - 1;
+    if((piece.pieceId < 12) || ((piece.pieceId > 11) && (piece.isKing == true))){
+        if((isInBorders(row + 1, cell - 1)) && (boardArray[row + 1][cell - 1] == null))
+            piece.possibleMoves.push(`cell-${row + 2}-${cell}`);
+        if((isInBorders(row + 1, cell + 1)) && (boardArray[row + 1][cell + 1] == null))
+            piece.possibleMoves.push(`cell-${row + 2}-${cell + 2}`);
+    }
+    if((piece.pieceId > 11) || ((piece.pieceId < 12) && (piece.isKing == true))){
+        if((isInBorders(row - 1, cell - 1)) && (boardArray[row - 1][cell - 1] == null))
+            piece.possibleMoves.push(`cell-${row}-${cell}`);
+        if((isInBorders(row - 1, cell + 1)) && (boardArray[row - 1][cell + 1] == null))
+            piece.possibleMoves.push(`cell-${row}-${cell + 2}`);
+    }
+    getPossibleJumps(piece); 
+}
+
+function getPossibleJumps(piece) {
+    jumpPossible = false;
+    let row = parseInt(piece.indexOfBoardPiece[5]) - 1;
+    let cell = parseInt(piece.indexOfBoardPiece[7]) - 1;
+    let result = [];
+    if (piece.pieceId < 12) {
+        if((isInBorders(row + 2, cell + 2)) && (boardArray[row + 2][cell + 2] == null) && (boardArray[row + 1][cell + 1] != null))
+            if (boardArray[row + 1][cell + 1] > 11)
+                result.push(`cell-${row + 3}-${cell + 3}`);
+        if((isInBorders(row + 2, cell - 2)) && (boardArray[row + 2][cell - 2] == null) && (boardArray[row + 1][cell - 1] != null))
+            if (boardArray[row + 1][cell - 1] > 11)
+                result.push(`cell-${row + 3}-${cell - 1}`);
+        if(selectedPiece.isKing) {
+            if((isInBorders(row - 2, cell + 2)) && (boardArray[row - 2][cell + 2] == null) && (boardArray[row - 1][cell + 1] != null))
+                if (boardArray[row - 1][cell + 1] > 11)
+                    result.push(`cell-${row - 1}-${cell + 3}`);
+            if((isInBorders(row - 2, cell - 2)) && (boardArray[row - 2][cell - 2] == null) && (boardArray[row - 1][cell - 1] != null))
+                if (boardArray[row - 1][cell - 1] > 11)
+                    result.push(`cell-${row - 1}-${cell - 1}`);
+        }
+    }
+    if (piece.pieceId > 11) {
+        if((isInBorders(row - 2, cell + 2)) && (boardArray[row - 2][cell + 2] == null) && (boardArray[row - 1][cell + 1] != null))
+            if (boardArray[row - 1][cell + 1] < 12)
+                result.push(`cell-${row - 1}-${cell + 3}`);
+        if((isInBorders(row - 2, cell - 2)) && (boardArray[row - 2][cell - 2] == null) && (boardArray[row - 1][cell - 1] != null))
+            if (boardArray[row - 1][cell - 1] < 12)
+                result.push(`cell-${row - 1}-${cell - 1}`);
+        if(selectedPiece.isKing) {
+            if((isInBorders(row + 2, cell + 2)) && (boardArray[row + 2][cell + 2] == null) && (boardArray[row + 1][cell + 1] != null))
+                if (boardArray[row + 1][cell + 1] < 12)
+                    result.push(`cell-${row + 3}-${cell + 3}`);
+            if((isInBorders(row + 2, cell - 2)) && (boardArray[row + 2][cell - 2] == null) && (boardArray[row + 1][cell - 1] != null))
+                if (boardArray[row + 1][cell - 1] < 12)
+                    result.push(`cell-${row + 3}-${cell - 1}`);
+        }
+    }
+    if(result.length > 0) {
+        jumpPossible = true;
+        piece.hasJumps = true;
+        piece.possibleMoves = result;
+    }
 }
 
 function giveOnClicks() {
-    if (turn == "white")
-        for (let i = 0; i < whitePieces.length; i++)
+    disableNormalMoves = false;
+    if (turn == "white") {
+        for (let i = 0; i < whitePieces.length; i++) {
+            let cell = document.getElementById(whitePieces[i].id).parentElement.id;
+            let isKing = document.getElementById(whitePieces[i].id).classList.contains("king") ? true : false;
+            let moves = [];
+            let piece = new Piece(whitePieces[i].id, cell, isKing, moves, false);
+            getPossibleMoves(piece);
+            if(piece.hasJumps) disableNormalMoves = true;
+            piecesMoves.push(piece);
+        }
+        if (disableNormalMoves) {
+            for (let i = 0; i < piecesMoves.length; i++)
+                if(piecesMoves[i].hasJumps)
+                    document.getElementById(piecesMoves[i].pieceId).addEventListener("click", getPlayerPieces);
+        }
+        else for (let i = 0; i < whitePieces.length; i++)
             whitePieces[i].addEventListener("click", getPlayerPieces);
-    else for (let i = 0; i < blackPieces.length; i++)
+    }
+    else {
+        for (let i = 0; i < blackPieces.length; i++) {
+            let cell = document.getElementById(blackPieces[i].id).parentElement.id;
+            let isKing = document.getElementById(blackPieces[i].id).classList.contains("king") ? true : false;
+            let moves = [];
+            let piece = new Piece(blackPieces[i].id, cell, isKing, moves, false);
+            getPossibleMoves(piece);
+            if(piece.hasJumps) disableNormalMoves = true;
+            piecesMoves.push(piece);
+        }
+        if (disableNormalMoves) {
+            for (let i = 0; i < piecesMoves.length; i++)
+                if(piecesMoves[i].hasJumps)
+                    document.getElementById(piecesMoves[i].pieceId).addEventListener("click", getPlayerPieces);
+        }
+        else for (let i = 0; i < blackPieces.length; i++)
             blackPieces[i].addEventListener("click", getPlayerPieces);
+    }
 }
 
 function getPlayerPieces() {
@@ -82,6 +187,7 @@ function resetSelectedPieceProperties() {
     selectedPiece.indexOfBoardPiece = "",
     selectedPiece.isKing = false,
     selectedPiece.possibleMoves = []
+    selectedPiece.hasJumps = false;
 }
 
 function getSelectedPiece() {
@@ -90,86 +196,24 @@ function getSelectedPiece() {
     selectedPiece.pieceId = id;
     for (let i = 0; i < 8; i++)
         for (let j = 0; j < 8; j++) {
-            if (boardArray[i][j] == id)
+            if (boardArray[i][j] == id) {
                 cell = `cell-${i + 1}-${j + 1}`;
+                break;
+            }
         }
     selectedPiece.indexOfBoardPiece = cell;
     selectedPiece.isKing = document.getElementById(selectedPiece.pieceId).classList.contains("king") ? true : false;
-    getPossibleMoves();
-}
-
-function isInBorders(row, cell) {
-    return row > -1 && row < 8 && cell > -1 && cell < 8;
-}
-
-function getPossibleMoves() {
-    let row = parseInt(selectedPiece.indexOfBoardPiece[5]) - 1;
-    let cell = parseInt(selectedPiece.indexOfBoardPiece[7]) - 1;
-    if((selectedPiece.pieceId < 12) || ((selectedPiece.pieceId > 11) && (selectedPiece.isKing == true))){
-        if((isInBorders(row + 1, cell - 1)) && (boardArray[row + 1][cell - 1] == null))
-            selectedPiece.possibleMoves.push(`cell-${row + 2}-${cell}`);
-        if((isInBorders(row + 1, cell + 1)) && (boardArray[row + 1][cell + 1] == null))
-            selectedPiece.possibleMoves.push(`cell-${row + 2}-${cell + 2}`);
-    }
-    if((selectedPiece.pieceId > 11) || ((selectedPiece.pieceId < 12) && (selectedPiece.isKing == true))){
-        if((isInBorders(row - 1, cell - 1)) && (boardArray[row - 1][cell - 1] == null))
-            selectedPiece.possibleMoves.push(`cell-${row}-${cell}`);
-        if((isInBorders(row - 1, cell + 1)) && (boardArray[row - 1][cell + 1] == null))
-            selectedPiece.possibleMoves.push(`cell-${row}-${cell + 2}`);
-    }
-    getPossibleJumps("act"); 
-}
-
-function getPossibleJumps(action) {
-    jumpPossible = false;
-    let row = parseInt(selectedPiece.indexOfBoardPiece[5]) - 1;
-    let cell = parseInt(selectedPiece.indexOfBoardPiece[7]) - 1;
-    let result = [];
-    if (selectedPiece.pieceId < 12) {
-        if((isInBorders(row + 2, cell + 2)) && (boardArray[row + 2][cell + 2] == null) && (boardArray[row + 1][cell + 1] != null))
-            if (boardArray[row + 1][cell + 1] > 11)
-                result.push(`cell-${row + 3}-${cell + 3}`);
-        if((isInBorders(row + 2, cell - 2)) && (boardArray[row + 2][cell - 2] == null) && (boardArray[row + 1][cell - 1] != null))
-            if (boardArray[row + 1][cell - 1] > 11)
-                result.push(`cell-${row + 3}-${cell - 1}`);
-        if(selectedPiece.isKing) {
-            if((isInBorders(row - 2, cell + 2)) && (boardArray[row - 2][cell + 2] == null) && (boardArray[row - 1][cell + 1] != null))
-                if (boardArray[row - 1][cell + 1] > 11)
-                    result.push(`cell-${row - 1}-${cell + 3}`);
-            if((isInBorders(row - 2, cell - 2)) && (boardArray[row - 2][cell - 2] == null) && (boardArray[row - 1][cell - 1] != null))
-                if (boardArray[row - 1][cell - 1] > 11)
-                    result.push(`cell-${row - 1}-${cell - 1}`);
+    for (let i = 0; i < piecesMoves.length; i++)
+        if(piecesMoves[i].pieceId == selectedPiece.pieceId) {
+            selectedPiece.possibleMoves = piecesMoves[i].possibleMoves;
+            selectedPiece.hasJumps = piecesMoves[i].hasJumps;
+            break;
         }
-    }
-    if (selectedPiece.pieceId > 11) {
-        if((isInBorders(row - 2, cell + 2)) && (boardArray[row - 2][cell + 2] == null) && (boardArray[row - 1][cell + 1] != null))
-            if (boardArray[row - 1][cell + 1] < 12)
-                result.push(`cell-${row - 1}-${cell + 3}`);
-        if((isInBorders(row - 2, cell - 2)) && (boardArray[row - 2][cell - 2] == null) && (boardArray[row - 1][cell - 1] != null))
-            if (boardArray[row - 1][cell - 1] < 12)
-                result.push(`cell-${row - 1}-${cell - 1}`);
-        if(selectedPiece.isKing) {
-            if((isInBorders(row + 2, cell + 2)) && (boardArray[row + 2][cell + 2] == null) && (boardArray[row + 1][cell + 1] != null))
-                if (boardArray[row + 1][cell + 1] < 12)
-                    result.push(`cell-${row + 3}-${cell + 3}`);
-            if((isInBorders(row + 2, cell - 2)) && (boardArray[row + 2][cell - 2] == null) && (boardArray[row + 1][cell - 1] != null))
-                if (boardArray[row + 1][cell - 1] < 12)
-                    result.push(`cell-${row + 3}-${cell - 1}`);
-        }
-    }
-    if(action == "act") {
-        for(let i = 0; i < result.length; i++)
-            selectedPiece.possibleMoves.push(result[i]);
-        if(result.length > 0) jumpPossible = true;
-        document.getElementById(selectedPiece.pieceId).style.outline = "3px solid yellow";
-        enableCells();
-    }
-    else if(action == "check") {
-        if(result.length > 0) jumpPossible = true;
-    }
+    enableCells()
 }
 
 function enableCells() {
+    document.getElementById(selectedPiece.pieceId).style.outline = "3px solid yellow";
     for (let i = 0; i < selectedPiece.possibleMoves.length; i++) {
         let row = parseInt(selectedPiece.possibleMoves[i][5]) - 1;
         let cell = parseInt(selectedPiece.possibleMoves[i][7]) - 1;
@@ -228,7 +272,7 @@ function modifyBoard(selectedCell, nextCell, checkerEaten) {
     dotChildren.forEach(child => {
     child.remove();
     });
-    if(!jumpPossible) resetSelectedPieceProperties();
+    if(!selectedPiece.hasJumps) resetSelectedPieceProperties();
     removeCellOnClicks();
     removePiecesOnClicks();
 }
@@ -243,12 +287,13 @@ function removePiecesOnClicks() {
 }
 
 function changePlayer() {
-    if(jumpPossible) {
+    if(selectedPiece.hasJumps) {
         selectedPiece.possibleMoves = [];
+        selectedPiece.hasJumps = false;
         selectedPiece.indexOfBoardPiece = document.getElementById(selectedPiece.pieceId).parentElement.id;
-        getPossibleJumps("check");
+        getPossibleJumps(selectedPiece);
     }
-    if(jumpPossible) {
+    if(selectedPiece.hasJumps) {
         if (turn == "white")
         for (let i = 0; i < whitePieces.length; i++)
             if(whitePieces[i].id == selectedPiece.pieceId)
@@ -256,9 +301,9 @@ function changePlayer() {
         else for (let i = 0; i < blackPieces.length; i++)
             if(blackPieces[i].id == selectedPiece.pieceId)
                 blackPieces[i].addEventListener("click", getPlayerPieces);
-        getPossibleJumps("act");
+        enableCells();
     }
-    else {
+    else if(!selectedPiece.hasJumps) {
         if(turn == "white") {
             turn = "black";
             document.getElementById("move").innerHTML = "Ход черных";
@@ -267,6 +312,7 @@ function changePlayer() {
             turn = "white";
             document.getElementById("move").innerHTML = "Ход белых";
         }
+        piecesMoves = [];
         giveOnClicks();
     } 
 }
