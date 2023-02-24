@@ -1,5 +1,3 @@
-var piecesCounter = 0
-
 var boardArray = [
     [ null, 0, null, 1, null, 2, null, 3 ],
     [ 4, null, 5, null, 6, null, 7, null ],
@@ -10,6 +8,8 @@ var boardArray = [
     [ null, 16, null, 17, null, 18, null, 19 ],
     [ 20, null, 21, null, 22, null, 23, null ]
 ]
+
+var piecesCounter = 0
 
 function getCell(row, cell) {
     let cellColor = (row + cell) % 2 == 0 ? "white" : "black";
@@ -34,9 +34,9 @@ var boardCells = document.getElementsByClassName("cell");
 var whitePieces = document.getElementsByClassName("white-piece");
 var blackPieces = document.getElementsByClassName("black-piece");
 
-var turn = "white";
 var whiteScore = 12; // добавить условие выигрыша
 var blackScore = 12;
+var turn = "white";
 var playerPieces = whitePieces;
 
 class Piece {
