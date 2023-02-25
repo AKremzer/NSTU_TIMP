@@ -1,6 +1,4 @@
-var piecesCounter = 0
-
-var boardArray = [
+let boardArray = [
     [ null, 0, null, 1, null, 2, null, 3 ],
     [ 4, null, 5, null, 6, null, 7, null ],
     [ null, 8, null, 9, null, 10, null, 11 ],
@@ -10,6 +8,8 @@ var boardArray = [
     [ null, 16, null, 17, null, 18, null, 19 ],
     [ 20, null, 21, null, 22, null, 23, null ]
 ]
+
+let piecesCounter = 0
 
 function getCell(row, cell) {
     let cellColor = (row + cell) % 2 == 0 ? "white" : "black";
@@ -30,14 +30,14 @@ function buildBoard() {
     return result;
 }
 
-var boardCells = document.getElementsByClassName("cell");
-var whitePieces = document.getElementsByClassName("white-piece");
-var blackPieces = document.getElementsByClassName("black-piece");
+let boardCells = document.getElementsByClassName("cell");
+let whitePieces = document.getElementsByClassName("white-piece");
+let blackPieces = document.getElementsByClassName("black-piece");
 
-var turn = "white";
-var whiteScore = 12; // добавить условие выигрыша
-var blackScore = 12;
-var playerPieces = whitePieces;
+let turn = "white";
+let whiteScore = 12;
+let blackScore = 12;
+let playerPieces = whitePieces;
 
 class Piece {
   constructor(id, index, king, moves, jump) {
@@ -49,19 +49,19 @@ class Piece {
   }
 }
  
-var selectedPiece = new Piece(-1, "", false, [], false);
-var piecesMoves = [];
-var disableNormalMoves = false;
-
-function isInBorders(row, cell) {
-    return row > -1 && row < 8 && cell > -1 && cell < 8;
-}
-
 class Move {
   constructor(turn, move) {
     this.turn = turn;
     this.move = move;
   }
+}
+
+let selectedPiece = new Piece(-1, "", false, [], false);
+let piecesMoves = [];
+let disableNormalMoves = false;
+
+function isInBorders(row, cell) {
+    return row > -1 && row < 8 && cell > -1 && cell < 8;
 }
 
 function getPossibleMoves(piece) {
@@ -202,19 +202,12 @@ function makeMove(cellChosen) {
 function modifyBoard(selectedCell, nextCell, checkerEaten) {
     let row = parseInt(selectedCell[5]) - 1, cell = parseInt(selectedCell[7]) - 1;
     let rowTo = parseInt(nextCell[5]) - 1, cellTo = parseInt(nextCell[7]) - 1;
-    
     boardArray[row][cell] = null;
     boardArray[rowTo][cellTo] = parseInt(selectedPiece.pieceId);
-    
-    if (turn == "black" && selectedPiece.pieceId < 12 && rowTo == 7) {
-        document.getElementById(selectedPiece.pieceId).classList.add("king")
-    }
-    if (turn == "white" && selectedPiece.pieceId >11 && rowTo == 0) {
+    if ((turn == "black" && selectedPiece.pieceId < 12 && rowTo == 7) || (turn == "white" && selectedPiece.pieceId >11 && rowTo == 0))
         document.getElementById(selectedPiece.pieceId).classList.add("king");
-    }
     if (checkerEaten != null) {
-        let eatenRow = parseInt(checkerEaten[5]) - 1;
-        let eatenCell = parseInt(checkerEaten[7]) - 1;
+        let eatenRow = parseInt(checkerEaten[5]) - 1, eatenCell = parseInt(checkerEaten[7]) - 1;
         boardArray[eatenRow][eatenCell] = null;
         boardCells[eatenRow * 8 + eatenCell].innerHTML = "";
         if (turn == "black" && selectedPiece.pieceId < 12)
@@ -222,10 +215,9 @@ function modifyBoard(selectedCell, nextCell, checkerEaten) {
         if (turn == "white" && selectedPiece.pieceId > 11)
             blackScore--
     }
-    let dotChildren = Array.from(document.getElementsByClassName("dot"));
-    dotChildren.forEach(child => {
-    child.remove();
-    });
+    let dotChildren = document.getElementsByClassName("dot");
+    for (let i = 0; i < dotChildren.length; i++)
+        dotChildren[i].remove();
     if(!selectedPiece.hasJumps) resetSelectedPieceProperties();
     removeCellOnClicks();
     removePiecesOnClicks();
@@ -240,36 +232,33 @@ function removePiecesOnClicks() {
     changePlayer();
 }
 
-function changePlayer() {
-    if(whiteScore == 0) {
-        document.getElementById("move").innerHTML = "Победа черных";
-        return;
-    }
-    else if(blackScore == 0) {
-        document.getElementById("move").innerHTML = "Победа белых";
-        return;
-    }
+function settleJumpSeries() {
+    selectedPiece.possibleMoves = [];
+    selectedPiece.hasJumps = false;
+    selectedPiece.indexOfBoardPiece = document.getElementById(selectedPiece.pieceId).parentElement.id;
+    getPossibleJumps(selectedPiece);
     if(selectedPiece.hasJumps) {
-        selectedPiece.possibleMoves = [];
-        selectedPiece.hasJumps = false;
-        selectedPiece.indexOfBoardPiece = document.getElementById(selectedPiece.pieceId).parentElement.id;
-        getPossibleJumps(selectedPiece);
-        if(selectedPiece.hasJumps) {
-            for (let i = 0; i < playerPieces.length; i++)
-                if(playerPieces[i].id == selectedPiece.pieceId)
-                    playerPieces[i].addEventListener("click", getPlayerPieces);
-            enableCells();
-        }
+        for (let i = 0; i < playerPieces.length; i++)
+            if(playerPieces[i].id == selectedPiece.pieceId)
+                playerPieces[i].addEventListener("click", getPlayerPieces);
+        enableCells();
     }
+    else return true;
+}
+
+function changePlayer() {
+    if((whiteScore == 0) || (blackScore == 0)) {
+        document.getElementById("move").innerHTML = "Победа" + (whiteScore == 0 ? " черных" : " белых");
+        return;
+    }
+    let noJumpSeries = false;
+    if(selectedPiece.hasJumps) 
+        settleJumpSeries();
     if(!selectedPiece.hasJumps) {
-        if(turn == "white") {
+        if(turn == "white")
             turn = "black";
-            document.getElementById("move").innerHTML = "Ход черных";
-        }
-        else {
-            turn = "white";
-            document.getElementById("move").innerHTML = "Ход белых";
-        }
+        else turn = "white";
+            document.getElementById("move").innerHTML = "Ход" + (turn == "black" ? " черных" : " белых");
         piecesMoves = [];
         turn == "white" ? giveOnClicks(whitePieces) : giveOnClicks(blackPieces);
     } 
