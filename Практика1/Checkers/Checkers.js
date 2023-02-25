@@ -1,3 +1,5 @@
+var piecesCounter = 0
+
 var boardArray = [
     [ null, 0, null, 1, null, 2, null, 3 ],
     [ 4, null, 5, null, 6, null, 7, null ],
@@ -8,8 +10,6 @@ var boardArray = [
     [ null, 16, null, 17, null, 18, null, 19 ],
     [ 20, null, 21, null, 22, null, 23, null ]
 ]
-
-var piecesCounter = 0
 
 function getCell(row, cell) {
     let cellColor = (row + cell) % 2 == 0 ? "white" : "black";
@@ -34,9 +34,9 @@ var boardCells = document.getElementsByClassName("cell");
 var whitePieces = document.getElementsByClassName("white-piece");
 var blackPieces = document.getElementsByClassName("black-piece");
 
+var turn = "white";
 var whiteScore = 12; // добавить условие выигрыша
 var blackScore = 12;
-var turn = "white";
 var playerPieces = whitePieces;
 
 class Piece {
@@ -48,7 +48,7 @@ class Piece {
     this.hasJumps = jump;
   }
 }
-    
+ 
 var selectedPiece = new Piece(-1, "", false, [], false);
 var piecesMoves = [];
 var disableNormalMoves = false;
@@ -57,60 +57,39 @@ function isInBorders(row, cell) {
     return row > -1 && row < 8 && cell > -1 && cell < 8;
 }
 
+class Move {
+  constructor(turn, move) {
+    this.turn = turn;
+    this.move = move;
+  }
+}
+
 function getPossibleMoves(piece) {
-    let row = parseInt(piece.indexOfBoardPiece[5]) - 1;
-    let cell = parseInt(piece.indexOfBoardPiece[7]) - 1;
-    if((piece.pieceId < 12) || ((piece.pieceId > 11) && (piece.isKing == true))){
-        if((isInBorders(row + 1, cell - 1)) && (boardArray[row + 1][cell - 1] == null))
-            piece.possibleMoves.push(`cell-${row + 2}-${cell}`);
-        if((isInBorders(row + 1, cell + 1)) && (boardArray[row + 1][cell + 1] == null))
-            piece.possibleMoves.push(`cell-${row + 2}-${cell + 2}`);
-    }
-    if((piece.pieceId > 11) || ((piece.pieceId < 12) && (piece.isKing == true))){
-        if((isInBorders(row - 1, cell - 1)) && (boardArray[row - 1][cell - 1] == null))
-            piece.possibleMoves.push(`cell-${row}-${cell}`);
-        if((isInBorders(row - 1, cell + 1)) && (boardArray[row - 1][cell + 1] == null))
-            piece.possibleMoves.push(`cell-${row}-${cell + 2}`);
-    }
+    let row = parseInt(piece.indexOfBoardPiece[5]) - 1, cell = parseInt(piece.indexOfBoardPiece[7]) - 1;
+    let moves = [ new Move("white", [-1, -1]), new Move("white", [-1, 1]), new Move("black", [1, -1]), new Move("black", [1, 1]) ];
+    for (let i = 0; i < moves.length; i++)
+        if((moves[i].turn == turn) || (piece.isKing)) {
+            let newRow = row + moves[i].move[0];
+            let newCell = cell + moves[i].move[1];
+            if((isInBorders(newRow, newCell)) && (boardArray[newRow][newCell] == null)) 
+                piece.possibleMoves.push(`cell-${newRow + 1}-${newCell + 1}`);
+        }
     getPossibleJumps(piece); 
 }
 
 function getPossibleJumps(piece) {
-    let row = parseInt(piece.indexOfBoardPiece[5]) - 1;
-    let cell = parseInt(piece.indexOfBoardPiece[7]) - 1;
+    let row = parseInt(piece.indexOfBoardPiece[5]) - 1, cell = parseInt(piece.indexOfBoardPiece[7]) - 1;
+    let moves = [ new Move("white", [-2, -2]), new Move("white", [-2, 2]), new Move("black", [2, -2]), new Move("black", [2, 2]) ];
     let result = [];
-    if (piece.pieceId < 12) {
-        if((isInBorders(row + 2, cell + 2)) && (boardArray[row + 2][cell + 2] == null) && (boardArray[row + 1][cell + 1] != null))
-            if (boardArray[row + 1][cell + 1] > 11)
-                result.push(`cell-${row + 3}-${cell + 3}`);
-        if((isInBorders(row + 2, cell - 2)) && (boardArray[row + 2][cell - 2] == null) && (boardArray[row + 1][cell - 1] != null))
-            if (boardArray[row + 1][cell - 1] > 11)
-                result.push(`cell-${row + 3}-${cell - 1}`);
-        if(selectedPiece.isKing) {
-            if((isInBorders(row - 2, cell + 2)) && (boardArray[row - 2][cell + 2] == null) && (boardArray[row - 1][cell + 1] != null))
-                if (boardArray[row - 1][cell + 1] > 11)
-                    result.push(`cell-${row - 1}-${cell + 3}`);
-            if((isInBorders(row - 2, cell - 2)) && (boardArray[row - 2][cell - 2] == null) && (boardArray[row - 1][cell - 1] != null))
-                if (boardArray[row - 1][cell - 1] > 11)
-                    result.push(`cell-${row - 1}-${cell - 1}`);
+    for (let i = 0; i < moves.length; i++)
+        if((moves[i].turn == turn) || (piece.isKing)) {
+            let newRow = row + moves[i].move[0], newCell = cell + moves[i].move[1];
+            let eatenRow = row + moves[i].move[0] / 2, eatenCell = cell + moves[i].move[1] / 2;
+            if((isInBorders(newRow, newCell)) && (boardArray[newRow][newCell] == null) && (boardArray[eatenRow][eatenCell] != null)) {
+                if(!document.getElementById(boardArray[eatenRow][eatenCell]).classList.contains(turn + "-piece"))
+                   result.push(`cell-${newRow + 1}-${newCell + 1}`);
+            }
         }
-    }
-    if (piece.pieceId > 11) {
-        if((isInBorders(row - 2, cell + 2)) && (boardArray[row - 2][cell + 2] == null) && (boardArray[row - 1][cell + 1] != null))
-            if (boardArray[row - 1][cell + 1] < 12)
-                result.push(`cell-${row - 1}-${cell + 3}`);
-        if((isInBorders(row - 2, cell - 2)) && (boardArray[row - 2][cell - 2] == null) && (boardArray[row - 1][cell - 1] != null))
-            if (boardArray[row - 1][cell - 1] < 12)
-                result.push(`cell-${row - 1}-${cell - 1}`);
-        if(selectedPiece.isKing) {
-            if((isInBorders(row + 2, cell + 2)) && (boardArray[row + 2][cell + 2] == null) && (boardArray[row + 1][cell + 1] != null))
-                if (boardArray[row + 1][cell + 1] < 12)
-                    result.push(`cell-${row + 3}-${cell + 3}`);
-            if((isInBorders(row + 2, cell - 2)) && (boardArray[row + 2][cell - 2] == null) && (boardArray[row + 1][cell - 1] != null))
-                if (boardArray[row + 1][cell - 1] < 12)
-                    result.push(`cell-${row + 3}-${cell - 1}`);
-        }
-    }
     if(result.length > 0) {
         piece.hasJumps = true;
         piece.possibleMoves = result;
@@ -195,8 +174,7 @@ function getSelectedPiece() {
 function enableCells() {
     document.getElementById(selectedPiece.pieceId).style.outline = "3px solid yellow";
     for (let i = 0; i < selectedPiece.possibleMoves.length; i++) {
-        let row = parseInt(selectedPiece.possibleMoves[i][5]) - 1;
-        let cell = parseInt(selectedPiece.possibleMoves[i][7]) - 1;
+        let row = parseInt(selectedPiece.possibleMoves[i][5]) - 1, cell = parseInt(selectedPiece.possibleMoves[i][7]) - 1;
         boardCells[row * 8 + cell].innerHTML = `<div class="dot"></div>`;
         boardCells[row * 8 + cell].setAttribute("onclick", `makeMove('cell-${row + 1}-${cell + 1}')`);
     }
@@ -204,15 +182,13 @@ function enableCells() {
 
 function makeMove(cellChosen) {
     document.getElementById(selectedPiece.pieceId).remove();
-    let row = parseInt(selectedPiece.indexOfBoardPiece[5]) - 1;
-    let cell = parseInt(selectedPiece.indexOfBoardPiece[7]) - 1;
+    let row = parseInt(selectedPiece.indexOfBoardPiece[5]) - 1, cell = parseInt(selectedPiece.indexOfBoardPiece[7]) - 1;
     boardCells[row * 8 + cell].innerHTML = "";
     let checkerData = selectedPiece.pieceId < 12 ? (selectedPiece.isKing ? `<div class="checker black-piece king" id="${selectedPiece.pieceId}"></div>` : 
                                                                            `<div class="checker black-piece" id="${selectedPiece.pieceId}"></div>`)
                                                  : (selectedPiece.isKing ? `<div class="checker white-piece king" id="${selectedPiece.pieceId}"></div>` : 
                                                                            `<div class="checker white-piece" id="${selectedPiece.pieceId}"></div>`);
-    let rowTo = parseInt(cellChosen[5]) - 1;
-    let cellTo = parseInt(cellChosen[7]) - 1;
+    let rowTo = parseInt(cellChosen[5]) - 1, cellTo = parseInt(cellChosen[7]) - 1;
     boardCells[rowTo * 8 + cellTo].innerHTML = checkerData;
     
     let checkerEaten = null;
@@ -224,10 +200,8 @@ function makeMove(cellChosen) {
 }
 
 function modifyBoard(selectedCell, nextCell, checkerEaten) {
-    let row = parseInt(selectedCell[5]) - 1;
-    let cell = parseInt(selectedCell[7]) - 1;
-    let rowTo = parseInt(nextCell[5]) - 1;
-    let cellTo = parseInt(nextCell[7]) - 1;
+    let row = parseInt(selectedCell[5]) - 1, cell = parseInt(selectedCell[7]) - 1;
+    let rowTo = parseInt(nextCell[5]) - 1, cellTo = parseInt(nextCell[7]) - 1;
     
     boardArray[row][cell] = null;
     boardArray[rowTo][cellTo] = parseInt(selectedPiece.pieceId);
@@ -280,18 +254,14 @@ function changePlayer() {
         selectedPiece.hasJumps = false;
         selectedPiece.indexOfBoardPiece = document.getElementById(selectedPiece.pieceId).parentElement.id;
         getPossibleJumps(selectedPiece);
+        if(selectedPiece.hasJumps) {
+            for (let i = 0; i < playerPieces.length; i++)
+                if(playerPieces[i].id == selectedPiece.pieceId)
+                    playerPieces[i].addEventListener("click", getPlayerPieces);
+            enableCells();
+        }
     }
-    if(selectedPiece.hasJumps) {
-        if (turn == "white")
-        for (let i = 0; i < whitePieces.length; i++)
-            if(whitePieces[i].id == selectedPiece.pieceId)
-                whitePieces[i].addEventListener("click", getPlayerPieces);
-        else for (let i = 0; i < blackPieces.length; i++)
-            if(blackPieces[i].id == selectedPiece.pieceId)
-                blackPieces[i].addEventListener("click", getPlayerPieces);
-        enableCells();
-    }
-    else if(!selectedPiece.hasJumps) {
+    if(!selectedPiece.hasJumps) {
         if(turn == "white") {
             turn = "black";
             document.getElementById("move").innerHTML = "Ход черных";
