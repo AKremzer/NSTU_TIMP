@@ -1,3 +1,4 @@
+// разделение строки на отдельные слова по пробелу (остальные символы игнорируются)
 function splitString(inputString) {
     let result = [], strLength = inputString.length, singleWord = "";
     for (let i = 0; i < strLength; i++) {
@@ -12,6 +13,15 @@ function splitString(inputString) {
     return result;
 }
 
+// подстрока строки от begin до end
+String.prototype.getSubstring = function (begin, end) {
+    let result = "";
+    for (let i = begin; i < end; i++)
+        result+= this[i];
+    return result;
+}
+
+// нахождение первого по алфавиту слова в строке
 function findFirst(splitWords) {
     let wordsCount = splitWords.length;
     if(wordsCount == 0) return null;
@@ -19,19 +29,22 @@ function findFirst(splitWords) {
     for (let i = 0; i < wordsCount; i++) {
         if(splitWords[i] == minWord) continue;
         let wordLength = splitWords[i].length < minWord.length ? splitWords[i].length : minWord.length;
+        // побуквенное сравнение двух слов
         for(let j = 0; j < wordLength; j++) {
-            if(splitWords[i][j].toLowerCase() < minWord[j].toLowerCase()) {
+            if(splitWords[i][j] < minWord[j]) {
                 minWord = splitWords[i];
                 break;
             }
-            else if(splitWords[i][j].toLowerCase() != minWord[j].toLowerCase()) break;
+            else if(splitWords[i][j] != minWord[j]) break;
         }
-        if ((splitWords[i].length < minWord.length) && (splitWords[i].toLowerCase() == minWord.substring(0, splitWords[i].length).toLowerCase())) 
+        // если текущее слово является подстрокой минимального по алфавиту, оно становится минимальным
+        if ((splitWords[i].length < minWord.length) && (splitWords[i] == minWord.getSubstring(0, splitWords[i].length))) 
             minWord = splitWords[i];
     }
     return minWord;        
 }
 
+// размещение слов в строке в алфавитном порядке
 function orderString() {
     let splitWords = splitString(document.getElementById("stringInput").value), wordsCount = splitWords.length;
     let result = "";
