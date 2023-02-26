@@ -191,7 +191,7 @@ function enableCells() {
     for (let i = 0; i < selectedPiece.possibleMoves.length; i++) {
         let row = parseInt(selectedPiece.possibleMoves[i][5]) - 1, cell = parseInt(selectedPiece.possibleMoves[i][7]) - 1;
         boardCells[row * 8 + cell].innerHTML = `<div class="dot"></div>`;
-        boardCells[row * 8 + cell].setAttribute("click", `makeMove('cell-${row + 1}-${cell + 1}')`);
+        boardCells[row * 8 + cell].setAttribute("onclick", `makeMove('cell-${row + 1}-${cell + 1}')`);
     }
 }
 
