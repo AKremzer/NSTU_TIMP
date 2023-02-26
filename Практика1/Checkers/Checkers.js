@@ -21,9 +21,9 @@ function getCell(row, cell) {
 
 function buildBoard() {
     let result = "";
-    for (let i = 1; i < 9; i++) {
+    for (let i = 1; i < boardArray.length + 1; i++) {
         result += `<div id="row-${i}" class="row">`;
-        for (let j = 1; j < 9; j++)
+        for (let j = 1; j < boardArray[0].length + 1; j++)
             result += getCell(i, j) + "\n";
         result += `</div>`;
     }
@@ -35,7 +35,7 @@ let whitePieces = document.getElementsByClassName("white-piece");
 let blackPieces = document.getElementsByClassName("black-piece");
 
 let turn = "white";
-let whiteScore = 12;
+let whiteScore = 12; // добавить условие выигрыша
 let blackScore = 12;
 let playerPieces = whitePieces;
 
@@ -184,10 +184,7 @@ function makeMove(cellChosen) {
     document.getElementById(selectedPiece.pieceId).remove();
     let row = parseInt(selectedPiece.indexOfBoardPiece[5]) - 1, cell = parseInt(selectedPiece.indexOfBoardPiece[7]) - 1;
     boardCells[row * 8 + cell].innerHTML = "";
-    let checkerData = selectedPiece.pieceId < 12 ? (selectedPiece.isKing ? `<div class="checker black-piece king" id="${selectedPiece.pieceId}"></div>` : 
-                                                                           `<div class="checker black-piece" id="${selectedPiece.pieceId}"></div>`)
-                                                 : (selectedPiece.isKing ? `<div class="checker white-piece king" id="${selectedPiece.pieceId}"></div>` : 
-                                                                           `<div class="checker white-piece" id="${selectedPiece.pieceId}"></div>`);
+    let checkerData = `<div class="checker ${turn}-piece` + (selectedPiece.isKing ? " king\"" : "\"") + ` id="${selectedPiece.pieceId}"></div>`;
     let rowTo = parseInt(cellChosen[5]) - 1, cellTo = parseInt(cellChosen[7]) - 1;
     boardCells[rowTo * 8 + cellTo].innerHTML = checkerData;
     
