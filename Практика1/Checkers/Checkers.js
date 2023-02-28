@@ -131,6 +131,7 @@ function giveOnClicks(pieces) {
 // начало серии функций, вызываемых при нажатии на доступную шашку, определение шашек текушего хода
 function getPlayerPieces() {
     playerPieces = (turn == "white") ? whitePieces : blackPieces;
+    removeDots();
     removeCellOnClicks();
     resetBorders();
 }
@@ -155,7 +156,6 @@ function resetBorders() {
         if(playerPieces[i].style.outline != 0) {
             playerPieces[i].style.outline = 0;
         }
-    removeDots();
     resetSelectedPieceProperties();
     getSelectedPiece();
 }
@@ -166,6 +166,7 @@ function resetSelectedPieceProperties() {
     selectedPiece.isKing = false,
     selectedPiece.possibleMoves = []
     selectedPiece.hasJumps = false;
+    removeDots();
 }
 
 // получение информации о выбранной шашке
