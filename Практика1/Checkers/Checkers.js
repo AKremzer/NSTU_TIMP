@@ -9,9 +9,9 @@ let boardArray = [
     [ null, 16, null, 17, null, 18, null, 19 ],
     [ 20, null, 21, null, 22, null, 23, null ]
 ]; 
-let piecesCounter = 0; 
 
 // html для клетки доски в зависимости от ее положения на доске
+let piecesCounter = 0; 
 function getCell(row, cell) 
 {
     let cellColor = (row + cell) % 2 == 0 ? "white" : "black";
@@ -105,15 +105,14 @@ function getPossibleJumps(piece) {
     }
 }
 
-// добавление шашкам event listener'ов для взаимодействия с ними игрока
+// добавление шашкам атрибутов onclick для взаимодействия с ними игрока
 function giveOnClicks(pieces) {
     disableNormalMoves = false;
     // вычисление доступных ходов для всех шашек текущего хода
     for (let i = 0; i < pieces.length; i++) {
         let cell = document.getElementById(pieces[i].id).parentElement.id;
         let isKing = document.getElementById(pieces[i].id).classList.contains("king") ? true : false;
-        let moves = [];
-        let piece = new Piece(pieces[i].id, cell, isKing, moves, false);
+        let piece = new Piece(pieces[i].id, cell, isKing, [], false);
         getPossibleMoves(piece);
         if(piece.hasJumps) disableNormalMoves = true;
         piecesMoves.push(piece);
@@ -122,11 +121,11 @@ function giveOnClicks(pieces) {
     if (disableNormalMoves) {
         for (let i = 0; i < piecesMoves.length; i++)
             if(piecesMoves[i].hasJumps)
-                document.getElementById(piecesMoves[i].pieceId).addEventListener("click", getPlayerPieces);
+                document.getElementById(piecesMoves[i].pieceId).setAttribute("onclick", "getPlayerPieces()");
     }
     // иначе взаимодействовать можно с любой шашкой текущего хода
     else for (let i = 0; i < pieces.length; i++)
-        pieces[i].addEventListener("click", getPlayerPieces);
+        pieces[i].setAttribute("onclick", "getPlayerPieces()");
 }
 
 // начало серии функций, вызываемых при нажатии на доступную шашку, определение шашек текушего хода
@@ -224,10 +223,7 @@ function modifyBoard(selectedCell, nextCell, checkerEaten) {
         let eatenRow = parseInt(checkerEaten[5]) - 1, eatenCell = parseInt(checkerEaten[7]) - 1;
         boardArray[eatenRow][eatenCell] = null;
         boardCells[eatenRow * 8 + eatenCell].innerHTML = "";
-        if (turn == "black" && selectedPiece.pieceId < 12)
-            whiteScore--;
-        if (turn == "white" && selectedPiece.pieceId > 11)
-            blackScore--
+        turn == "black" ? whiteScore-- : blackScore--;
     }
     if(!selectedPiece.hasJumps) resetSelectedPieceProperties();
     removeDots();
@@ -235,13 +231,13 @@ function modifyBoard(selectedCell, nextCell, checkerEaten) {
     removePiecesOnClicks();
 }
 
-// удаление event listener'ов с шашек текущего хода
+// удаление атрибутов onclick с шашек текущего хода
 function removePiecesOnClicks() {
     if (turn == "white")
         for (let i = 0; i < whitePieces.length; i++)
-            whitePieces[i].removeEventListener("click", getPlayerPieces);
+            whitePieces[i].removeAttribute("onclick");
     else for (let i = 0; i < blackPieces.length; i++)
-            blackPieces[i].removeEventListener("click", getPlayerPieces);
+            blackPieces[i].removeAttribute("onclick");
     changePlayer();
 }
 
@@ -254,7 +250,7 @@ function settleJumpSeries() {
     if(selectedPiece.hasJumps) {
         for (let i = 0; i < playerPieces.length; i++)
             if(playerPieces[i].id == selectedPiece.pieceId)
-                playerPieces[i].addEventListener("click", getPlayerPieces);
+                playerPieces[i].setAttribute("onclick", "getPlayerPieces()");
         enableCells();
     }
 }
@@ -270,10 +266,8 @@ function changePlayer() {
     if(selectedPiece.hasJumps) 
         settleJumpSeries();
     if(!selectedPiece.hasJumps) {
-        if(turn == "white")
-            turn = "black";
-        else turn = "white";
-            document.getElementById("move").innerHTML = "Ход" + (turn == "black" ? " черных" : " белых");
+        turn = (turn == "white" ? "black" : "white");
+        document.getElementById("move").innerHTML = "Ход" + (turn == "black" ? " черных" : " белых");
         piecesMoves = [];
         turn == "white" ? giveOnClicks(whitePieces) : giveOnClicks(blackPieces);
     } 
