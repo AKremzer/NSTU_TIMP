@@ -39,14 +39,15 @@ p {
 
 #visuals {
     position: fixed;
-    right: 1.5vw;
-    left: 52.5vw;
-    top: 2.5vh;
+
+    left: 53vw;
+    top: 1.5vw;
+    bottom: 2.5vh;
     background-color: #fffffe;
     width: 43vw;
     height: 92.55vh;
     border-radius: 5px;
-    padding: 6px;
+
 }
 
 #in-visuals {
@@ -62,14 +63,16 @@ p {
 }
 .code-editor {
     position: relative;
+    margin: 0;
     background-color: #fffffe;
-    padding: 10px 10px 10px 40px;
+    padding: 10px 10px 0 40px;
     font-family: 'JetBrains Mono', monospace;
     line-height: 1.5;
     font-size: 15px;
     height: 250px;
     overflow: hidden;
     border-radius: 5px;
+    bottom: 2vh;
 }
 
 .numbers {
