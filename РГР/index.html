@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSStudy</title>
+    <link rel="stylesheet" href="game-styles.css">
+</head>
+<body>
+    <div class="app">
+        <section id="task">
+            <h1>CSStudy</h1>
+            <h2>1. Цвет</h2>
+            <p>
+                Цвет в CSS может задаваться несколькими способами:<br><br>
+                <span style="color:#fffffe">1) Названия цветов</span><br>
+                   Самые распространенные цвета могут быть выбраны с помощью их названий:
+                red, green, blue. Полный список доступных цветов представлен <a href="https://www.w3schools.com/cssref/css_colors.php">здесь</a><br><br>
+                <span style="color:#fffffe">2) RGB</span><br>
+                   Цвет может быть задан в виде rgb(красный, зеленый, синий), где каждое значение
+                   отвечает за интенсивность соответствующего цвета. Например, красный цвет также можно задать
+                   как rgb(255,0,0)<br><br>
+                <span style="color:#fffffe">3) HEX</span><br>
+                   Шестнадцатеричный цвет задается в формате #ККЗЗСС, где КК (красный), ЗЗ (зеленый) и СС (синий)
+                   являются шестнадцатеричными числами, отвечающими за интенсивность цвета. Красный цвет можно задать как
+                   #FF0000, где FF = 255<br><br>
+                Цвет фона задается с помощью <span class="code">background-color: цвет;</span><br>
+                Для цвета текста используется <span class="code">color: цвет;</span><br><br>
+                Текст в правой части экрана пока выглядит довольно серо. Допишите код так, чтобы добавить цвета фону и тексту на нем.
+                Не бойтесь экспериментировать!
+            </p>
+            <div class="code-editor">
+                <div class="numbers">
+                    1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+                </div>
+                <pre id="my-code-1">somecode</pre>
+                <textarea id="your-code" ></textarea>
+                <pre id="my-code-2">somecode</pre>
+            </div>
+        </section>
+        <section id="visuals">
+            <div id="in-visuals">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                 sed do eiusmod tempor incididunt ut labore et dolore magna
+                 aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                 ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+                 aute irure dolor in reprehenderit in voluptate velit esse cillum
+                 dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                 non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
+        </section>
+    </div>
+    <script src="game-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2&display=swap');
+body {
+    padding: 0;
+    margin: 0;
+}
+h1 {
+    color: #fffffe;
+    font-size: 30px;
+}
+h2 {
+    color: #fffffe;
+    font-size: 25px;
+    padding: 0;
+}
+
+a {
+    color: #a7a9be;
+    text-underline-position: under;
+}
+
+p {
+    color: #a7a9be;
+    font-size: 20px;
+}
+
+.app {
+    display: flex;
+}
+
+#task {
+    width: 50%;
+    padding: 0 20px 20px 20px;
+    font-family: 'Exo 2', sans-serif;
+    background-color: #0f0e17;
+    overflow: auto;
+}
+
+#visuals {
+    position: fixed;
+    right: 0;
+    background-color: #fffffe;
+    width: 45vw;
+    height: 100vh;
+}
+
+#in-visuals {
+    padding: 20px;
+    font-size: 3.5vh;
+}
+.code {
+    font-family: 'JetBrains Mono', monospace;
+    color: #fffffe;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #f25f4c;
+}
+.code-editor {
+    position: relative;
+    background-color: #fffffe;
+    padding: 10px 10px 10px 40px;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.5;
+    font-size: 15px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.numbers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #f25f4c;
+    color: #fffffe;
+    padding: 10px 6px;
+    height: 100%;
+    text-align: right;
+    overflow: hidden;
+}
+
+pre {
+    margin: 0;
+    padding: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: bold;
+    font-size: 15px;
+    color: #a7a9be;
+}
+
+textarea {
+    background-color: #EEEEEE;
+    color: #f25f4c;
+    margin: 0;
+    vertical-align: top;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    resize: none;
+    height: 20px;
+    width: 98%;
+    overflow: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: bold;
+}
