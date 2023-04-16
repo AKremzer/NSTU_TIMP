@@ -3,6 +3,7 @@
 body {
     padding: 0;
     margin: 0;
+    background-color: #0f0e17;
 }
 h1 {
     color: #fffffe;
@@ -38,10 +39,14 @@ p {
 
 #visuals {
     position: fixed;
-    right: 0;
+    right: 1.5vw;
+    left: 52.5vw;
+    top: 2.5vh;
     background-color: #fffffe;
-    width: 45vw;
-    height: 100vh;
+    width: 43vw;
+    height: 92.55vh;
+    border-radius: 5px;
+    padding: 6px;
 }
 
 #in-visuals {
