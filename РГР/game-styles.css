@@ -39,7 +39,7 @@ p {
 
 #visuals {
     position: fixed;
-
+    overflow: hidden;
     left: 53vw;
     top: 1.5vw;
     bottom: 2.5vh;
