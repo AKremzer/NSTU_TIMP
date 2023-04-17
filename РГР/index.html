@@ -9,24 +9,31 @@
     <div class="app">
         <section id="task">
             <h1>CSStudy</h1>
-            <h2>1. Цвет</h2>
+            <div id="theme-block">
+                <h2 id="theme-name">1. Цвет</h2>
+                <div id="navigation">
+                    <button class="gobutton back"></button>
+                    <p style="padding: 1vw; color:white">Выбор темы</p>
+                    <button class="gobutton forward"></button>
+                </div>
+            </div>
             <p>
                 Цвет в CSS может задаваться несколькими способами:<br><br>
                 <span style="color:#fffffe">1) Названия цветов</span><br>
                    Самые распространенные цвета могут быть выбраны с помощью их названий:
-                red, green, blue. Полный список доступных цветов представлен <a href="https://www.w3schools.com/cssref/css_colors.php">здесь</a><br><br>
+                red, green, blue. Полный список доступных цветов представлен <a href="https://www.w3schools.com/cssref/css_colors.php">здесь</a>.<br><br>
                 <span style="color:#fffffe">2) RGB</span><br>
                    Цвет может быть задан в виде rgb(красный, зеленый, синий), где каждое значение
                    отвечает за интенсивность соответствующего цвета. Например, красный цвет также можно задать
-                   как rgb(255,0,0)<br><br>
+                   как rgb(255,0,0).<br><br>
                 <span style="color:#fffffe">3) HEX</span><br>
                    Шестнадцатеричный цвет задается в формате #ККЗЗСС, где КК (красный), ЗЗ (зеленый) и СС (синий)
                    являются шестнадцатеричными числами, отвечающими за интенсивность цвета. Красный цвет можно задать как
-                   #FF0000, где FF = 255<br><br>
-                Цвет фона задается с помощью <span class="code">background-color: цвет;</span><br>
+                   #FF0000, где FF = 255.<br><br>
+                Цвет фона элемента задается с помощью <span class="code">background-color: цвет;</span><br>
                 Для цвета текста используется <span class="code">color: цвет;</span><br><br>
-                Текст в правой части экрана пока выглядит довольно серо. Допишите код так, чтобы добавить цвета фону и тексту на нем.
-                Не бойтесь экспериментировать!<br><br>
+                Текст в правой части экрана пока выглядит довольно серо. Допишите код, чтобы это исправить (попробуйте
+                поэкспериментировать с разными способами обозначения цвета).<br><br>
             </p>
             <div class="code-editor">
                 <div class="numbers">
