@@ -60,6 +60,7 @@ p {
 
 #task {
     width: 50%;
+    min-width: 550px;
     padding: 0 20px 20px 20px;
     font-family: 'Exo 2', sans-serif;
     background-color: #180B2B;
@@ -175,11 +176,25 @@ textarea {
 .square-container {
     width: 25px;
     height: 25px;
+    margin-right: 10px;
 }
 
 #user {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 30%;
+    width: 40%;
+}
+
+.signout {
+    cursor: pointer;
+    outline: none;
+    color: #FFFFFe;
+    font-size: 18px;
+    border: none;
+    font-family: 'Exo 2', sans-serif;
+    background-color: #f25f4c;
+    width: 8vw;
+    height: 28px;
+    border-radius: 3px;
 }
