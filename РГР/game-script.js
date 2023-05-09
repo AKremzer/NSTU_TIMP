@@ -1,4 +1,6 @@
 let user_input = document.getElementById('your-code')
+let levelof20 = document.getElementById('levelof20')
+let userlog = document.getElementById('userlog')
 
 user_input.addEventListener('input', () => {
     user_input.style.height = 0;
@@ -21,7 +23,25 @@ user_input.addEventListener('input', () => {
         elementName = elementName.substring(1);
         elementToChange = document.getElementById(elementName);
         elementToChange.style.cssText = user_input.value;
-        console.log(user_input.value);
     }
 })
+
+function updateProgressBar(level) {
+    let progress = (level / 20) * 100;
+    var progressBarFill = document.getElementById("progress-bar-fill");
+    progressBarFill.style.width = progress + "%";
+}
+
+let urlParams = new URLSearchParams(window.location.search);
+let level = urlParams.get('level');
+levelof20.innerHTML = level + "/20";
+
+updateProgressBar(level);
+let user = urlParams.get('login');
+userlog.innerHTML = user;
+
+window.addEventListener('hashchange', () => {
+    var newLevel = urlParams.get('level');
+    updateProgressBar(newLevel);
+});
 
