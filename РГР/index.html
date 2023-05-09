@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="main-page-styles.css">
+</head>
+<body>
+<div class="background"></div>
+  <div class="container">
+      <div class="content">
+          <h2>CSStudy</h2>
+
+          <div class="welcome">
+              <h2>Изучайте CSS, не выходя из браузера<br></h2>
+              <p>Теория и практика для каждого с редактированием
+                  CSS в реальном времени</p>
+          </div>
+      </div>
+      <div class="auth-box">
+          <div class="form-box sign-in unhidden" id="signform">
+              <form class="sign-in-form" action="signin.php" method="POST">
+                  <h2>Вход в систему</h2>
+                  <div class="input-box">
+                      <input type="text" name="login" required>
+                      <label>Логин</label>
+                  </div>
+                  <div class="input-box">
+                      <input type="password" name="password" required>
+                      <label>Пароль</label>
+                  </div>
+                  <input type="submit" class="sub-button" value="Войти">
+
+                  <div class="login-register">
+                      <p>Нет профиля? <a href="#" class="register" id="reg"> Регистрация</a></p><br>
+                  </div>
+              </form>
+          </div>
+          <div class="form-box sign-up hidden" id="regform">
+              <form class="sign-up-form" action="#">
+                  <h2>Регистрация</h2>
+                  <div class="input-box">
+                      <input type="text" required>
+                      <label>Новый логин</label>
+                  </div>
+                  <div class="input-box">
+                      <input type="password" required>
+                      <label>Новый пароль</label>
+                  </div>
+                  <input type="submit" class="sub-button" value="Зарегистрироваться">
+
+                  <div class="login-register">
+                      <p>Уже есть профиль? <a href="#" class="login" id="log"> Войти</a></p><br>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+  <script src="main-page-script.js"></script>
+</body>
+</html>
