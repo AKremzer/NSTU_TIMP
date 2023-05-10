@@ -5,26 +5,12 @@
     <title>Title</title>
     <link rel="stylesheet" href="main-page-styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script>
-        $.ajax({
-            url: 'signin.php',
-            type: 'GET',
-            success: function(response) {
-                if(response.includes("lev")) {
-                    window.location.href = response;
-                } else {
-                    console.log(response);
-                }
-            }
-        });
-    </script>
 </head>
 <body>
 <div class="background"></div>
 <div class="container">
     <div class="content">
         <h2>CSStudy</h2>
-
         <div class="welcome">
             <h2>Изучайте CSS, не выходя из браузера<br></h2>
             <p>Теория и практика для каждого с редактированием
