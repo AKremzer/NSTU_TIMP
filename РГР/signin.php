@@ -23,7 +23,7 @@ if (isset($_COOKIE['signtoken'])) {
     $params = "?login=" . urlencode($_COOKIE['signtoken']) . "&level=" . urlencode($level);
     $redirectUrl = $level . "lev.html";
     echo $redirectUrl . $params;
-    exit(); 
+    exit();
 }
 
 elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -52,7 +52,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Authentication failed. Invalid login or password.";
             exit();
         }
-    } 
+    }
     else {
         echo "Authentication failed. Invalid login or password.";
         exit();
