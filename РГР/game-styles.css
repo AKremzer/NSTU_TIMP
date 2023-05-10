@@ -70,6 +70,7 @@ p {
 #visuals {
     position: fixed;
     overflow: hidden;
+    align-items: center;
     left: 53vw;
     top: 2.5vh;
     bottom: 2.5vh;
@@ -158,7 +159,7 @@ textarea {
 .progress-bar-fill {
     height: 22px;
     border-radius: 5px;
-    background-color: #f25f4c;
+    background-color: white;
     transition: width 0.5s;
 }
 
@@ -190,11 +191,49 @@ textarea {
     cursor: pointer;
     outline: none;
     color: #FFFFFe;
-    font-size: 18px;
+    font-size: 19px;
     border: none;
     font-family: 'Exo 2', sans-serif;
     background-color: #f25f4c;
     width: 8vw;
-    height: 28px;
+    height: 35px;
+    border-radius: 4px;
+}
+
+#check {
+    cursor: pointer;
+    outline: none;
+    color: #FFFFFe;
+    font-size: 19px;
+    border: none;
+    font-family: 'Exo 2', sans-serif;
+    background-color: #f25f4c;
+    width: 9vw;
+    text-align: center;
+    height: 35px;
     border-radius: 3px;
+    right: 15px;
+    bottom: 15px;
+    position: absolute;
+    padding: 5px 10px;
+}
+
+.page-transition {
+    background-color: black;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
