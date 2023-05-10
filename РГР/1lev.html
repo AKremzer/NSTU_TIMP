@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>CSStudy</title>
     <link rel="stylesheet" href="game-styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
     <div class="app">
@@ -17,7 +18,7 @@
                         </div>
                         <p style="color:white" id="userlog">User</p>
                     </div>
-                    <button class="signout">Выход</button>
+                    <button class="signout" id="signoutbut">Выход</button>
                 </div>
             </div>
             <div id="theme-block">
@@ -27,9 +28,9 @@
                 </div>
                 <p id="levelof20">1/20</p>
                 <div id="navigation">
-                    <button class="gobutton back"></button>
+                    <button class="gobutton back" id="back"></button>
                     <p style="padding: 1vw; color:white">Выбор темы</p>
-                    <button class="gobutton forward"></button>
+                    <button class="gobutton forward" id="forward"></button>
                 </div>
             </div>
             <p>
@@ -40,15 +41,15 @@
                 <span style="color:#fffffe">2) RGB</span><br>
                    Цвет может быть задан в виде rgb(красный, зеленый, синий), где каждое значение
                    отвечает за интенсивность соответствующего цвета. Например, красный цвет также можно задать
-                   как rgb(255,0,0).<br><br>
+                   как rgb(255,0,0) или rgba(255,0,0,1), где последнее значение отвечает за прозрачность цвета.<br><br>
                 <span style="color:#fffffe">3) HEX</span><br>
                    Шестнадцатеричный цвет задается в формате #ККЗЗСС, где КК (красный), ЗЗ (зеленый) и СС (синий)
                    являются шестнадцатеричными числами, отвечающими за интенсивность цвета. Красный цвет можно задать как
                    #FF0000, где FF = 255.<br><br>
                 Цвет фона элемента задается с помощью <span class="code">background-color: цвет;</span><br>
                 Для цвета текста используется <span class="code">color: цвет;</span><br><br>
-                Текст в правой части экрана пока выглядит довольно серо. Допишите код, чтобы это исправить (попробуйте
-                поэкспериментировать с разными способами обозначения цвета).<br><br>
+                Текст в правой части экрана пока выглядит довольно серо. Измените цвет фона текста на HEX стандартного цвета "Chartreuse", а цвет
+                самого текста - на красный с прозрачностью 0.8.<br><br>
             </p>
             <div class="code-editor">
                 <div class="numbers">
@@ -57,6 +58,7 @@
                 <pre id="my-code-1">#edit-text {
 padding: 20px;
 font-size: 3.5vh;</pre>
+                <button id="check">Проверить</button>
                 <textarea id="your-code" rows="6"></textarea>
                 <pre id="my-code-2">}</pre>
             </div>
@@ -70,5 +72,8 @@ font-size: 3.5vh;</pre>
         </section>
     </div>
     <script src="game-script.js"></script>
+    <script>
+        getAnswer(1, "edit-text");
+    </script>
 </body>
 </html>
