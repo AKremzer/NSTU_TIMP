@@ -1,5 +1,5 @@
 <?php
-// Database connection parameters
+
 $servername = "localhost";
 $username = "phplogin";
 $password = "phppass";
@@ -22,7 +22,6 @@ if (strlen($newlogin) <= 60) {
     $result = $stmt->get_result();
 
     if ($result->num_rows == 0) {
-        // Insert the values into the users table
         $insertQuery = "INSERT INTO users (Login, Password, Level) VALUES (?, ?, 1)";
         $insertStmt = $conn->prepare($insertQuery);
         $insertStmt->bind_param("ss", $newlogin, $newpassword);
