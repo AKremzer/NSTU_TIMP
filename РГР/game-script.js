@@ -29,16 +29,32 @@ user_input.addEventListener('input', () => {
     if (elementName[0] == '#') {
         elementName = elementName.substring(1);
         elementToChange = document.getElementById(elementName);
-        elementToChange.style.cssText = user_input.value;
+        elementToChange.style.cssText += user_input.value;
     }
 })
+
+function removews(str) {
+    return str.replace(/\s/g, '');
+}
+
+function sleep(milliseconds) {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
 
 let checkfunc = function() {
     {
         let array = JSON.parse(answer);
-        let styles = window.getComputedStyle(divelem);
+        let divstyle = divelem.style.cssText;
         for (const [property, value] of array) {
-            if (removews(styles.getPropertyValue(property)) !== removews(value)) {
+            let regex = new RegExp("\\b" + property + "\\s*:\\s*(.*?)(;|$)");
+            let match = divstyle.match(regex);
+            if(match) {
+                if (removews(match[1]) !== removews(value)) {
+                    alert("Попробуйте еще раз!");
+                    return;
+                }
+            }
+            else {
                 alert("Попробуйте еще раз!");
                 return;
             }
@@ -52,9 +68,12 @@ let checkfunc = function() {
                 levelof20.innerHTML = response + "/20";
                 updateProgressBar(response);
                 userlevel = parseInt(response);
-                console.log("cool");
                 document.body.insertAdjacentHTML("afterbegin", "<div id=\"loading-overlay\">\n" +
-                    "    <p>Молодца круто классно</p>\n" +
+                    "<svg class=\"checkmark\" + xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 52 52\">" +
+                    "   <circle class=\"checkmark__circle\" cx=\"26\" cy=\"26\" r=\"25\" fill=\"none\"/> " +
+                    "   <path class=\"checkmark__check\" fill=\"none\" d=\"M14.1 27.2l7.1 7.2 16.7-16.8\"/>\n" +
+                    "</svg>\n" +
+                    "<span id=\"done\">Пункт пройден!</span>\n" +
                     "</div>");
                 await sleep(2000);
                 document.body.classList.add('page-transition');
@@ -101,7 +120,6 @@ $(document).ready(function () {
         success: function(response) {
             levelof20.innerHTML = response + "/20";
             updateProgressBar(response);
-            console.log(response);
             userlevel = parseInt(response);
         }
     });
@@ -129,14 +147,28 @@ forward.addEventListener('click', () => {
     let page = window.location.pathname.split('/').pop();
     let newlevel = parseInt(page[0]) + 1;
     if (newlevel <= userlevel)
+    {
         window.location.href = newlevel + "lev.html";
+    }
+    else {
+        document.getElementById('secret').scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'end'
+        });
+        checkbut.classList.add('shake');
+        setTimeout(function() {
+            checkbut.classList.remove('shake');
+        }, 1000);
+    }
 })
 
 back.addEventListener('click', () => {
     let page = window.location.pathname.split('/').pop();
     let newlevel = parseInt(page[0]) - 1;
-    if (newlevel > 0)
+    if (newlevel > 0) {
         window.location.href = newlevel + "lev.html";
+    }
 })
 
 let answer = "";
@@ -153,10 +185,3 @@ function getAnswer(level, elemid) {
     });
 }
 
-function removews(str) {
-    return str.replace(/\s/g, '');
-}
-
-function sleep(milliseconds) {
-    return new Promise(resolve => setTimeout(resolve, milliseconds));
-}
