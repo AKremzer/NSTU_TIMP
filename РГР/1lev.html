@@ -14,7 +14,7 @@
                 <div id="user">
                     <div style="display:flex; align-items: center">
                         <div class="square-container">
-                            <img src="user-solid-24.png" alt="User Image" class="user-icon">
+                            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
                         </div>
                         <p style="color:white" id="userlog">User</p>
                     </div>
@@ -22,52 +22,59 @@
                 </div>
             </div>
             <div id="theme-block">
-                <h2 id="theme-name">1. Цвет</h2>
+                <div id="theme">
+                    <h2 id="theme-name">1. Введение в CSS. Цвет</h2>
+                </div>
                 <div class="progress-bar">
                     <div id="progress-bar-fill" class="progress-bar-fill"></div>
                 </div>
                 <p id="levelof20">1/20</p>
                 <div id="navigation">
                     <button class="gobutton back" id="back"></button>
-                    <p style="padding: 1vw; color:white">Выбор темы</p>
+                    <p style="padding: 1vw; color:white">Уровень</p>
                     <button class="gobutton forward" id="forward"></button>
                 </div>
             </div>
             <p>
-                Цвет в CSS может задаваться несколькими способами:<br><br>
-                <span style="color:#fffffe">1) Названия цветов</span><br>
-                   Самые распространенные цвета могут быть выбраны с помощью их названий:
-                red, green, blue. Полный список доступных цветов представлен <a href="https://www.w3schools.com/cssref/css_colors.php">здесь</a>.<br><br>
-                <span style="color:#fffffe">2) RGB</span><br>
-                   Цвет может быть задан в виде rgb(красный, зеленый, синий), где каждое значение
-                   отвечает за интенсивность соответствующего цвета. Например, красный цвет также можно задать
-                   как rgb(255,0,0) или rgba(255,0,0,1), где последнее значение отвечает за прозрачность цвета.<br><br>
-                <span style="color:#fffffe">3) HEX</span><br>
-                   Шестнадцатеричный цвет задается в формате #ККЗЗСС, где КК (красный), ЗЗ (зеленый) и СС (синий)
-                   являются шестнадцатеричными числами, отвечающими за интенсивность цвета. Красный цвет можно задать как
-                   #FF0000, где FF = 255.<br><br>
-                Цвет фона элемента задается с помощью <span class="code">background-color: цвет;</span><br>
-                Для цвета текста используется <span class="code">color: цвет;</span><br><br>
-                Текст в правой части экрана пока выглядит довольно серо. Измените цвет фона текста на HEX стандартного цвета "Chartreuse", а цвет
-                самого текста - на красный с прозрачностью 0.8.<br><br>
+                CSS, Cascading Style Sheets - язык стилей, который используется для описания внешнего вида
+                веб-страниц. Это одна из основных технологий, применяемых в современной веб-разработке, позволяющая
+                разделить структуру страницы, за которую отвечает HTML, от ее внешнего представления и стилизации.
+                <br><br> Синтаксис CSS включает в себя селектор, указывающий на HTML-элемент, к которому применяется стиль,
+                блок объявлений, состоящий из пар свойство-значение, где свойствам CSS задаются подоходящие значения,
+                определяющие уникальный внешний вид элемента.
             </p>
-            <div class="code-editor">
+            <div class="text-image" style="background-image: url('images/syntax.png'); width: 500px; height: 180px;"></div>
+            <p>
+                Первое свойство, с которого начнется погружение в CSS - <span class="code">color</span>. <br>
+                <span class="code">color</span> определяет цвет текста, который содержит элемент.<br><br>
+                Цвет в CSS может задаваться несколькими способами, которые будут подробно рассмотрены в следующем пункте.
+                Самым простым из них является задание цвета с помощью его названия - CSS поддерживает 147 цветов, от распространенных
+                (yellow, red) до специфичных (lawngreen, orchid и так далее). <a href="https://colorscheme.ru/html-colors.html">Здесь</a> представлено
+                разнообразие цветов, которые могут быть заданы ключевыми словами.
+                <br><br>Обучение на CSStudy ведется последовательно - следующий уровень не будет доступен до прохождения предыдущего. Все вносимые
+                изменения видны в реальном времени в рабочей области, но для того, чтобы перейт на следующий уровень, необходимо проверить свой
+                ввод соответствующей кнопкой. К пройденным уровням можно возвращаться, экспериментируя с CSS без необходимости проверки.
+                <br><br>Для того, чтобы перейти на следующий пункт, измените цвет текста в рабочей области на красный. Обратите внимание на синтаксис.<br><br>
+            </p>
+            <div class="code-editor" id="code-editor">
                 <div class="numbers">
                     1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
                 </div>
                 <pre id="my-code-1">#edit-text {
-padding: 20px;
-font-size: 3.5vh;</pre>
+text-align: center;
+height: 100px;
+width: 380px;
+font-size: 50px;
+font-weight: bold;</pre>
                 <button id="check">Проверить</button>
                 <textarea id="your-code" rows="6"></textarea>
                 <pre id="my-code-2">}</pre>
             </div>
+            <div id="secret"></div>
         </section>
-        <section id="visuals">
-            <div id="edit-text">
-                ЦВЕТ
-                -а, мн. -а, -ов, м. Один из видов красочного радужного свечения - от
-                красного до фиолетового,а также их сочетаний или оттенков.
+        <section id="visuals" style="display: flex; align-items: center; justify-content: center;">
+            <div id="edit-text" style="text-align: center; height: 100px; width: 380px; font-size: 50px; font-weight: bold">
+                Hello CSS!
             </div>
         </section>
     </div>
