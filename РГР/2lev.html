@@ -14,7 +14,7 @@
       <div id="user">
         <div style="display:flex; align-items: center">
           <div class="square-container">
-            <img src="user-solid-24.png" alt="User Image" class="user-icon">
+            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
           </div>
           <p style="color:white" id="userlog">User</p>
         </div>
@@ -22,38 +22,75 @@
       </div>
     </div>
     <div id="theme-block">
-      <h2 id="theme-name">2. Тема</h2>
+      <div id="theme">
+        <h2 id="theme-name">2. Цвет. Продолжение</h2>
+      </div>
       <div class="progress-bar">
         <div id="progress-bar-fill" class="progress-bar-fill"></div>
       </div>
       <p id="levelof20">1/20</p>
       <div id="navigation">
         <button class="gobutton back" id="back"></button>
-        <p style="padding: 1vw; color:white">Выбор темы</p>
+        <p style="padding: 1vw; color:white">Уровень</p>
         <button class="gobutton forward" id="forward"></button>
       </div>
     </div>
     <p>
-      Это вторая тема.
+      Названия цветов не предоставляют полной творческой свободы, поэтому в этом пункте будут рассмотрены <span style="color:white">способы задания цвета:</span>
+    <br><br><span style="color:white">1)RGB</span><br>
+    Цвет может быть задан в виде rgb(значение красного, значение зеленого, значение синего), где каждое значение
+    отвечает за интенсивность соответствующего цвета. Например, красный цвет также можно задать
+    как rgb(255,0,0) или rgba(255,0,0,1), где последнее значение отвечает за прозрачность цвета (1 - непрозрачный, 0 - абсолютно прозрачный).
+    <br>Новый вариант синтаксиса rgb в CSS объединяет rgb и rgba в одну функцию, вводя необязательное значение прозрачности и убирая запятые
+    между значениями: rgb(255 0 0) для красного цвета или rgb(255 0 0 / .8) для красного с прозрачностью 80%;
     </p>
-    <div class="code-editor">
+    <div class="text-image" style="background-image: url('images/rgb.webp'); width: 350px; height: 200px;"></div>
+    <p>
+      <span style="color:white">2) HEX</span><br>
+      Шестнадцатеричный цвет задается в формате #ККЗЗСС, где КК (красный), ЗЗ (зеленый) и СС (синий)
+      являются шестнадцатеричными числами, отвечающими за интенсивность цвета. Красный цвет можно задать как
+      #FF0000, где FF = 255. Еще один вариант - #ККЗЗССАА, где АА - шестнадцатеричное значение прозрасности цвета.<br>
+      <br><span style="color:white">3) HSL</span><br>
+      Еще один способ задания цвета в CSS - использование функции hsl() или hsla() (с прозрачностью). <br>
+      HSL(Hue, Saturation, Lightness) определяет расположение цвета на цветовом круге или оттенок (Hue), его насыщенность (Saturation) и
+      яркость (Lightness). HSLA добавляет к оттенку, насыщенности и яркости прозрачность цвета, которая определяется в процентах.
+    </p>
+    <div class="text-image" style="background-image: url('images/hsl.png'); width: 400px; height: 500px;"></div>
+    <p>
+      Свойство <span class="code">background-color</span> задает цвет фону элемента. Используя это свойство и пройденный материал,
+      задайте цвет фона текста как цвет с оттенком 36, 100%-ным значением насыщенности и яркостью в 30%, а цвет самого текста -
+      с интенсивностью зеленого равной 180, а также максимальной интенсивностью для красного и минимальной интенсивностью для синего цвета.
+      <br><br>
+    </p>
+    <div class="code-editor" id="code-editor">
       <div class="numbers">
         1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
       </div>
       <pre id="my-code-1">#edit-text {
-padding: 20px;
-font-size: 3.5vh;</pre>
+text-align:center;
+height: 250px;
+width: 380px;
+font-size: 30px;
+font-weight: bold;</pre>
       <button id="check">Проверить</button>
       <textarea id="your-code" rows="6"></textarea>
       <pre id="my-code-2">}</pre>
     </div>
+    <div id="secret"></div>
   </section>
-  <section id="visuals">
-    <div id="edit-text">
-      :)
+  <section id="visuals" style="display: flex; align-items: center; justify-content: center;">
+    <div id="edit-text" style="text-align: center; height: 300px; width: 380px; font-size: 30px; font-weight: bold;">
+      Нежным током желудка коснуться,<br>
+      Погрузиться в райские копи:<br>
+      Я пью кофе, не чтобы проснуться –<br>
+      Я проснулся, чтоб выпить кофе...<br>
+      @pasha_broskii_stihi
     </div>
   </section>
 </div>
 <script src="game-script.js"></script>
+<script>
+  getAnswer(2, "edit-text");
+</script>
 </body>
 </html>
