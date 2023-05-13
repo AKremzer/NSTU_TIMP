@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSStudy</title>
+    <link rel="stylesheet" href="game-styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+    <section id="task">
+        <div id="header">
+            <h1>CSStudy</h1>
+            <div id="user">
+                <div style="display:flex; align-items: center">
+                    <div class="square-container">
+                        <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+                    </div>
+                    <p style="color:white" id="userlog">User</p>
+                </div>
+                <button class="signout" id="signoutbut">Выход</button>
+            </div>
+        </div>
+        <div id="theme-block">
+            <div id="theme">
+                <h2 id="theme-name">12. CSS Layout</h2>
+            </div>
+            <div class="progress-bar">
+                <div id="progress-bar-fill" class="progress-bar-fill"></div>
+            </div>
+            <p id="levelof20">1/20</p>
+            <div id="navigation">
+                <button class="gobutton back" id="back"></button>
+                <p style="padding: 1vw; color:white">Уровень</p>
+                <button class="gobutton forward" id="forward"></button>
+            </div>
+        </div>
+        <p>
+            В дальнейших разделах будут рассмотрены средства управлением размещением элементов на странице - layout. CSS Layout позволяет определить, как
+            элементы должны быть размещены, выровнены и отображены на экране.<br><br>
+            Одной из основных концепций управления размещением элементов является "базовый поток" (normal flow). Это - естественный порядок, в котором элементы отображаются на веб-странице
+            без каких-либо специальных свойств CSS. В базовом потоке элементы располагаются друг за другом вертикально (по умолчанию) или горизонтально, начиная с верхнего левого угла родительского элемента. Порядок размещения элементов,
+            отличный от базового, задается свойствами <span class="code">display</span> и <span class="code">position</span>.<br><br>
+            Элементы в базовом потоке могут быть блочными - <span class="code">block</span>, или строчными - <span class="code">inline</span>. Блочные элементы занимают
+            всю доступную ширину страницы и начинаются с новой строки, в то время как строчные элементы занимают только необходимое пространство для содержимого
+            и отображаются в пределах строки. Примерами блочных элементов являются <span style="color:white;">&lt;div&gt;, &lt;p&gt;, &lt;section&gt;</span>, строчных элементов - <span style="color:white;">&lt;span&gt;,
+            &lt;button&gt;, &lt;a&gt;</span> и так далее.
+        </p>
+        <div class="text-image" style="background-image: url('images/blockinline.png'); width: 700px; height: 380px;"></div>
+        <p>
+            Layout - мощный инструмент, и пользоваться им нужно вдумчиво. Дом в рабочей области состоит из трех элементов по 3 этажа, но из-за путаницы в свойстве
+            <span class="code">display</span> одного элемента 3 этажа исчезли. Верните дом в изначальное состояние, применив нужное значение <span class="code">display</span> к пропавшим этажам.<br><br>
+        </p>
+        <div class="code-editor" id="code-editor">
+            <div class="numbers">
+                1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+            </div>
+            <pre id="my-code-1">#edit-text {
+background-image: url('images/house2.png');
+width: 300px;
+height: 70px;
+border-radius: 0;
+padding: 0;
+margin: 0;</pre>
+            <button id="check">Проверить</button>
+            <textarea id="your-code" rows="1"></textarea>
+            <pre id="my-code-2">}</pre>
+        </div>
+        <div id="secret"></div>
+    </section>
+    <div class="container" style="position: relative;">
+        <section id="visuals" style="background-color: #f5f2ed; align-items: center; justify-content: center">
+            <div style="position: relative; top: 30%; left: 25%;">
+                <span class="text-image" style="background-image: url('images/house1.png'); width: 300px; height: 125px; border-radius: 0; padding: 0; margin: 0; display: block;"></span>
+                <span id="edit-text" class="text-image" style="background-image: url('images/house2.png'); width: 300px; height: 70px; border-radius: 0; padding: 0; margin: 0; "></span>
+                <span class="text-image" style="background-image: url('images/house3.png'); width: 300px; height: 95px; border-radius: 0; padding: 0; margin: 0; display: block;"></span>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="game-script.js"></script>
+<script>
+    getAnswer(12, "edit-text");
+</script>
+</body>
+</html>

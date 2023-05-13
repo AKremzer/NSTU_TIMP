@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSStudy</title>
+  <link rel="stylesheet" href="game-styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <section id="task">
+    <div id="header">
+      <h1>CSStudy</h1>
+      <div id="user">
+        <div style="display:flex; align-items: center">
+          <div class="square-container">
+            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+          </div>
+          <p style="color:white" id="userlog">User</p>
+        </div>
+        <button class="signout" id="signoutbut">Выход</button>
+      </div>
+    </div>
+    <div id="theme-block">
+      <div id="theme">
+        <h2 id="theme-name">13. Float</h2>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <p id="levelof20">1/20</p>
+      <div id="navigation">
+        <button class="gobutton back" id="back"></button>
+        <p style="padding: 1vw; color:white">Уровень</p>
+        <button class="gobutton forward" id="forward"></button>
+      </div>
+    </div>
+    <p>
+      Когда элементу присваивается значение <span class="code">float</span>, он выводится из базового потока документа и может "плавать" вокруг других элементов
+      (отсюда название). Такой вариант размещения применяется, например, для обтекания картинок в тексте.<br><br>
+      Свойство <span class="code">float</span> применяется для определения <span style="color:white;">вариантов позиционирования элементов:</span><br><br>
+      1) <span class="code">float: none</span> - значение по умолчанию. Элемент не плавает и остается в базовом потоке. <br>
+      2) <span class="code">float: left</span> - элемент плавает слева, объекты выравниваются справа.<br>
+      3) <span class="code">float: right</span> - элемент плавает справа, объекты выравниваются слева.<br>
+    </p>
+    <div class="text-image" style="background-image: url('images/float.png'); width: 600px; height: 370px;"></div>
+    <p>
+      Стоит помнить, что <span class="code">float</span> считается устаревшим инструментом, но это свойство одновременно является одним из самых простых для начала
+      работы с Layout. Однако, эта простота сильно ограничивает функциональность. В рабочей области - начало русской народной сказки, которое выходит за ее пределы
+      из-за неудобно расположенной картинки. Оставьте картинку на том же месте, но обеспечьте обтекание текстом, используя <span class="code">float</span>.<br><br>
+    </p>
+    <div class="code-editor" id="code-editor">
+      <div class="numbers">
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+      </div>
+      <pre id="my-code-1">#edit-text {
+background-image: url('images/repka2.webp');
+width: 160px;
+height: 150px;
+padding: 0 20px 20px 20px;</pre>
+      <button id="check">Проверить</button>
+      <textarea id="your-code" rows="1"></textarea>
+      <pre id="my-code-2">}</pre>
+    </div>
+    <div id="secret"></div>
+  </section>
+  <section id="visuals" style="background-image: url('images/paper.jpg'); align-items: center; justify-content: center;">
+    <div style="font-size: 20px; font-family: 'Ruslan Display', cursive; padding: 20px; line-height: 1.5rem; color: #451b03">
+      Посадил дед репку и говорит:<br>
+      — Расти репка сладкая-сладкая! Расти большая-пребольшая!<br>
+      Выросла репка сладкая и большая-пребольшая.<br>
+      Пошел дед репку рвать: тянет-потянет, вытянуть не может.<br>
+      Позвал дед бабку.Бабка за дедку,<br>
+      Дедка за репку —<br>
+      Тянут-потянут, вытянуть не могут.<br>
+    </div>
+    <img src="images/repka2.webp" id="edit-text" height="170px" width="180px" style="padding: 0 20px 20px 20px;">
+    <div style="font-size: 20px; font-family: 'Ruslan Display', cursive;  padding: 0 20px 20px 20px; line-height: 1.5rem; color: #451b03">
+      Позвала бабка внучку.<br>
+      Внучка за бабку,<br>
+      Бабка за дедку,<br>
+      Дедка за репку —<br>
+      Тянут-потянут, вытянуть не могут.<br>
+      Позвала внучка Жучку.<br>
+      Жучка за внучку,<br>
+      Внучка за бабку,<br>
+      Бабка за дедку,<br>
+      Дедка за репку —<br>
+      Тянут-потянут, вытянуть не могут...<br>
+    </div>
+  </section>
+</div>
+<script src="game-script.js"></script>
+<script>
+  getAnswer(13, "edit-text");
+</script>
+</body>
+</html>
