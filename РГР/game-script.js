@@ -92,7 +92,8 @@ function updateProgressBar(level) {
     progressBarFill.style.width = progress + "%";
     progressBarFill.style.backgroundColor = "#f25f4c";
     let page = window.location.pathname.split('/').pop();
-    if(parseInt(page[0]) < level)
+    let pagenum = parseInt(page.match(/\d+/)[0]);
+    if(pagenum < level)
     {
         removeList();
         checkbut.style.backgroundColor = "#a7a9be";
@@ -131,11 +132,7 @@ signout.addEventListener('click', () => {
         url: 'signout.php',
         type: 'GET',
         success: function(response) {
-            if(response.includes("html")) {
-                window.location.href = response;
-            } else {
-                console.log(response);
-            }
+            window.location.replace(response);
         }
     });
 });
