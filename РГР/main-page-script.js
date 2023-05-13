@@ -1,3 +1,33 @@
+$('.sign-in-form').submit(function (e) {
+    e.preventDefault();
+    let formData = $(this).serialize();
+    $.ajax({
+        url: 'signin.php',
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+            if(response.includes('html'))
+                window.location.replace(response);
+            else alert(response);
+        }
+    });
+});
+
+$('.sign-up-form').submit(function (e) {
+    e.preventDefault();
+    let formData = $(this).serialize();
+    $.ajax({
+        url: 'signup.php',
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+            if(response.includes('html'))
+                window.location.replace(response);
+            else alert(response);
+        }
+    });
+});
+
 function sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
@@ -22,11 +52,11 @@ $(document).ready(function () {
                         "    <div class=\"loader\"></div>\n" +
                         "    <p>Вход в систему...</p>\n" +
                         "</div>");
-                    await sleep(2000);
+                    await sleep(1500);
                     document.body.classList.add('page-transition');
                     setTimeout(function() {
-                        window.location.href = response;
-                    }, 500);
+                        window.location.replace(response);
+                    }, 400);
                     $('#loading-overlay').remove();
                 } else {
                     console.log(response);
@@ -62,4 +92,5 @@ function hide(elem) {
 function show(elem) {
     elem.classList.remove("hidden");
 }
+
 
