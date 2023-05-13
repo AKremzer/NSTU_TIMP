@@ -83,6 +83,9 @@ p {
 }
 
 #visuals {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     position: fixed;
     overflow: hidden;
     align-items: center;
@@ -315,4 +318,11 @@ textarea {
     margin: 0 auto;
     border: none;
     margin-bottom: 10px;
+}
+
+.capy {
+    border-radius: 10px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
