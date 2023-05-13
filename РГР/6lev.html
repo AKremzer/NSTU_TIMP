@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSStudy</title>
+  <link rel="stylesheet" href="game-styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <section id="task">
+    <div id="header">
+      <h1>CSStudy</h1>
+      <div id="user">
+        <div style="display:flex; align-items: center">
+          <div class="square-container">
+            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+          </div>
+          <p style="color:white" id="userlog">User</p>
+        </div>
+        <button class="signout" id="signoutbut">Выход</button>
+      </div>
+    </div>
+    <div id="theme-block">
+      <div id="theme">
+        <h2 id="theme-name">6. Блочная модель</h2>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <p id="levelof20">1/20</p>
+      <div id="navigation">
+        <button class="gobutton back" id="back"></button>
+        <p style="padding: 1vw; color:white">Уровень</p>
+        <button class="gobutton forward" id="forward"></button>
+      </div>
+    </div>
+    <p>
+      Блочная модель - один из фундаментальных концептов CSS, определяющий способ размещения и организации элементов на веб-странице.
+      Конечные ширина, высота и положение элемента на странице определяются браузером именно по блочной модели, и ее понимание важно для
+      того, чтобы результаты расчета размера элемента не вызывали удивления. Реальный размер элемента складывается из
+      <span style="color: white;">следующих компонентов</span>:<br><br>
+      1) Внутренние отступы, или <span class="code">padding</span>.<br>
+      2) Границы, или <span class="code">border</span>.<br>
+      3) Внешние отступы, или <span class="code">margin</span>.<br>
+      4) Размеры содержимого, определяемые <span class="code">width</span> и <span class="code">height</span>.<br><br>
+      Каждый из этих компонентов будет рассмотрен в следующих пунктах более подробно.
+    </p>
+    <div class="text-image" style="background-image: url('images/box.png'); width: 600px; height: 450px;"></div>
+    <p>
+      Известно, что у HTML-элементов зачастую браузером задаются значения <span class="code">padding</span> и <span class="code">margin</span> по умолчанию,
+      что приводит к некорректному отображению элементов на странице. Чтобы избежать неожиданностей, часто для всех элементов при начале работы выставляют значение
+      <span class="code">padding</span> и <span class="code">margin</span> равное 0. Одно из этих свойств (не прописано в коде ниже) мешает капибарам обрести свое счастье. Одной строкой исправьте эту неприятность.<br><br>
+    </p>
+    <div class="code-editor" id="code-editor">
+      <div class="numbers">
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+      </div>
+      <pre id="my-code-1">#edit-text {
+background-image: url('images/capyright.jpg');
+width: 230px;
+height: 190px;
+</pre>
+      <button id="check">Проверить</button>
+      <textarea id="your-code" rows="1"></textarea>
+      <pre id="my-code-2">}</pre>
+    </div>
+    <div id="secret"></div>
+  </section>
+  <section id="visuals" style="display: flex; align-items: center; justify-content: center; background-color: #fe9399;">
+    <div class="capy" style="background-image: url('images/capyleft.jpg'); width: 230px; height: 190px;"></div>
+    <div class="capy" id="edit-text" style="background-image: url('images/capyright.jpg'); width: 230px; height: 190px; margin: 30px;"></div>
+  </section>
+</div>
+<script src="game-script.js"></script>
+<script>
+  getAnswer(6, "edit-text");
+</script>
+</body>
+</html>

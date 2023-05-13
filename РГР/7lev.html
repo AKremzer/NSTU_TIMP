@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSStudy</title>
+  <link rel="stylesheet" href="game-styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <section id="task">
+    <div id="header">
+      <h1>CSStudy</h1>
+      <div id="user">
+        <div style="display:flex; align-items: center">
+          <div class="square-container">
+            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+          </div>
+          <p style="color:white" id="userlog">User</p>
+        </div>
+        <button class="signout" id="signoutbut">Выход</button>
+      </div>
+    </div>
+    <div id="theme-block">
+      <div id="theme">
+        <h2 id="theme-name">7. Единицы измерения</h2>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <p id="levelof20">1/20</p>
+      <div id="navigation">
+        <button class="gobutton back" id="back"></button>
+        <p style="padding: 1vw; color:white">Уровень</p>
+        <button class="gobutton forward" id="forward"></button>
+      </div>
+    </div>
+    <p>
+      Так как блочная модель определяет размеры элемента, важно иметь представление о единицах измерения размера, представленных в CSS.
+      Кроме уже затронутых пикселей (px) существует множество единиц измерения, которые служат масштабируемости содержимого страницы, подстраиванию
+      под размеры окна и так далее. <span style="color:white;">Следующие единицы</span> могут быть использованы при указании размеров элементов в CSS:<br><br>
+      <span class="code">mm, cm, pt, pc</span> - типографские единицы измерения, которые, однако, практически не используются, так как браузер
+      пересчитывает эти значения в пиксели. Эти единицы измерения не рекомендуется использовать из-за их плохой работы в старых браузерах.<br><br>
+      <span class="code">em</span> - единица измерения, отображающая пропорцию по отношению к текущему размеру шрифта, где 1em - размер текущего шрифта. <span class="code">em</span> позволяет
+      регулировать размер шрифта относительно шрифта родительского элемента, что позволяет заменить размеры шрифта в дочерних элементах одной заменой в родительском.<br><br>
+      <span class="code">%</span> - единица измерения, выставляющая значение, которое как правило равно проценту от значения свойства родительского элемента с тем же названием.
+      Напрмер, <span class="code">font-size: 150%</span> выставит размер шрифта в дочернем элементе в полтора больше родительского. Однако, некоторые свойства дают другой результат -
+      интересный пример с <span class="code">width</span> и <span class="code">height</span> можно прочитать <a href="https://stackoverflow.com/questions/5657964/css-why-doesn-t-percentage-height-work">здесь</a><br><br>
+      <span class="code">rem</span> задает размер шрифта относительно шрифта элемента &lt;html&gt;. Этот размер задается по умолчанию браузером, но может быть переопределен.<br><br>
+      <span class="code">vw, vh, vmin, vmax</span> - единицы, которые позволяют задавать размеры относительно размеров окна. Таким образом, масштабирование окна будет изменять размер
+      элемента, размер которого задан в этих единицах. Расшифровка единиц:<br>
+      <span class="code">vw</span> - 1% ширины окна.<br>
+      <span class="code">vh</span> - 1% высоты окна.<br>
+      <span class="code">vmin</span> - определяется минимальным значением высоты или ширины окна.<br>
+      <span class="code">vmax</span> - определяется максимальным значением высоты или ширины окна.<br>
+      Для определения двух последних единиц можно привести пример: если ширина окна браузера равна 1200px, а высота 700px, то vmin будет равен 7px, а vmax — 12px.<br>
+    <p>
+      В рабочей области - результат использования асболютных единиц измерения на маленьком экране. Измените размер текста на размер, равный 3 процентам от ширины окна, и убедитесь в том, что текст
+      больше не выходит за пределы рабочей зоны. <br><br>
+    </p>
+    <div class="code-editor" id="code-editor">
+      <div class="numbers">
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+      </div>
+      <pre id="my-code-1">#edit-text {
+background-image: url('images/capyright.jpg');
+width: 230px;
+height: 190px;
+</pre>
+      <button id="check">Проверить</button>
+      <textarea id="your-code" rows="1"></textarea>
+      <pre id="my-code-2">}</pre>
+    </div>
+    <div id="secret"></div>
+  </section>
+  <section id="visuals" style="display: flex; align-items: center; justify-content: center;">
+    <div id="edit-text" style=" width: 90%; height: 90%; font-size: 150px; padding: 0">
+      Адаптивный веб-дизайн — дизайн веб-страниц, обеспечивающий правильное отображение сайта
+      на различных устройствах, подключённых к интернету, и динамически
+      подстраивающийся под заданные размеры окна браузера
+    </div>
+  </section>
+</div>
+<script src="game-script.js"></script>
+<script>
+  getAnswer(7, "edit-text");
+</script>
+</body>
+</html>

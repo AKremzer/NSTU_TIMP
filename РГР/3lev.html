@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSStudy</title>
+  <link rel="stylesheet" href="game-styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <section id="task">
+    <div id="header">
+      <h1>CSStudy</h1>
+      <div id="user">
+        <div style="display:flex; align-items: center">
+          <div class="square-container">
+            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+          </div>
+          <p style="color:white" id="userlog">User</p>
+        </div>
+        <button class="signout" id="signoutbut">Выход</button>
+      </div>
+    </div>
+    <div id="theme-block">
+      <div id="theme">
+        <h2 id="theme-name">3. Текст. Введение</h2>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <p id="levelof20">1/20</p>
+      <div id="navigation">
+        <button class="gobutton back" id="back"></button>
+        <p style="padding: 1vw; color:white">Уровень</p>
+        <button class="gobutton forward" id="forward"></button>
+      </div>
+    </div>
+    <p>
+      В предыдущем пункте в рабочей области уже использовались некоторые эффекты для текста, которые будут изучены далее. Введение
+      в текст начнется со <span style="color:white">следующих свойств:</span><br><br>
+      <span class="code">font-size</span>: определяет размер текста. Размер текста может быть задан в любых доступных единицах размера,
+      зачастую для текста используются единицы, позволяющие изменять размер текста в браузере (em) или в зависимости от размера видимой
+      области страницы (vw, vh). Единицы измерения будут подробно рассмотрены в пункте 6.<br><br>
+      <span class="code">font-family</span>: определяет шрифт текста. Обычно значения этого свойства перечисляются через запятую, чтобы
+      указать, какой шрифт следует использовать в качестве альтернативы, если основной не будет найден. Если название семьи шрифтов
+      содержит пробелы, оно берется в кавычки, как в <span class="code">font-family: "Times New Roman", serif;</span>. Первым значением будет название
+      семьи шрифтов, которая будет выступать основной, а завершающим значением рекомендуется оставлять название общего семейства шрифтов,
+      из которого в случае чего будет подобран похожий шрифт. Общие семейства имеют свои особенности:<br>
+      <span class="code">serif</span> шрифты имеют зазубренные окончания, расширяющиеся, сужающиеся концы, "засечки".<br>
+      <span class="code">sans-serif</span> шрифты не имеют засечек. Это шрифты с гладкими окончаниями.<br>
+      <span class="code">monospace</span> шрифты имеют одинаковую фиксированную ширину для каждого символа.<br>
+      <span class="code">cursive</span> шрифты отличаются рукописным видом.<br>
+      <span class="code">fantasy</span> шрифты являются прежде всего декоративными и наиболее отличаются своей игривостью.<br>
+    </p>
+    <div class="text-image" style="background-image: url('images/fonts.png'); width: 480px; height: 350px;"></div>
+    <p>
+      <br><span class="code">font-weight</span>: определяет толщину или стиль шрифта. Она может быть задана численно (100, 500, 900) или с помощью
+      ключевых слов (bold, light, medium и так далее). Числовые значения соответствуют ключевым словам: 100 - thin, 400 - normal,
+      700 - bold и 900 - heavy.
+    </p>
+    <div class="text-image" style="background-image: url('images/weight.png'); width: 650px; height: 350px;"></div>
+    <p>
+      На этой странице используется шрифт 'Exo 2'. Определите общее семейство этого шрифта, используя краткие описания в тексте выше, и
+      задайте такой же шрифт для текста в рабочей области, используя свойство <span class="code">font-family</span>, задайте ему размер
+      в 2em и значение толщины в виде ключевого слова, соответствующего числовому значению 700.<br><br>
+    </p>
+    <div class="code-editor" id="code-editor">
+      <div class="numbers">
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+      </div>
+      <pre id="my-code-1">#edit-text {
+text-align: center;
+height: 300px;
+width: 300px;</pre>
+      <button id="check">Проверить</button>
+      <textarea id="your-code" rows="3"></textarea>
+      <pre id="my-code-2">}</pre>
+    </div>
+    <div id="secret"></div>
+  </section>
+  <section id="visuals" style="display: flex; align-items: center; justify-content: center;">
+    <div id="edit-text" style="text-align: center; height: 300px; width: 300px;">
+      Текст — это законченное высказывание в виде нескольких предложений или абзацев, связанных общей темой и основной мыслью грамматически.
+    </div>
+  </section>
+</div>
+<script src="game-script.js"></script>
+<script>
+  getAnswer(3, "edit-text");
+</script>
+</body>
+</html>

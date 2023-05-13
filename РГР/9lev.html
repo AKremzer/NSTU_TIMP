@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSStudy</title>
+    <link rel="stylesheet" href="game-styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+    <section id="task">
+        <div id="header">
+            <h1>CSStudy</h1>
+            <div id="user">
+                <div style="display:flex; align-items: center">
+                    <div class="square-container">
+                        <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+                    </div>
+                    <p style="color:white" id="userlog">User</p>
+                </div>
+                <button class="signout" id="signoutbut">Выход</button>
+            </div>
+        </div>
+        <div id="theme-block">
+            <div id="theme">
+                <h2 id="theme-name">9. Свойство padding</h2>
+            </div>
+            <div class="progress-bar">
+                <div id="progress-bar-fill" class="progress-bar-fill"></div>
+            </div>
+            <p id="levelof20">1/20</p>
+            <div id="navigation">
+                <button class="gobutton back" id="back"></button>
+                <p style="padding: 1vw; color:white">Уровень</p>
+                <button class="gobutton forward" id="forward"></button>
+            </div>
+        </div>
+        <p>
+            Свойство <span class="code">padding</span> определяет внутренний отступ на всех четырёх сторонах элемента.  <span class="code">padding</span> позволяет "оттолкнуть" контент
+            от границ родительского элемента. Это свойство, которое совмещает в себе
+            отдельные свойства для каждой из четырех сторон: <span class="code">padding-top</span>, <span class="code">padding-right</span>, <span class="code">padding-bottom</span> и
+            <span class="code">padding-left</span>. Понять, что из себя представляет данное свойство, можно, приведя в пример поля в печатных документах, за которые тексту не позволено выходить.
+        </p>
+        <div class="text-image" style="background-image: url('images/padding.png'); width: 646px; height: 164px;"></div>
+        <p>
+            Используя только <span class="code">padding-left</span> и <span class="code">padding-top</span>, поместите текст в красную рамку. Верные значения даны в пикселях и оба кратны 10 - это минимальные
+            значения <span class="code">padding-left</span> и <span class="code">padding-top</span>, которые полностью "загонят" текст в рамку.<br>При этом, желтая граница покажет, как изменяются размеры
+            элемента, содержащего текст.<br><br>
+        </p>
+        <div class="code-editor" id="code-editor">
+            <div class="numbers">
+                1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+            </div>
+            <pre id="my-code-1">#edit-text {
+width: 300px;
+height: 300px;
+border: 5px dashed darkgoldenrod;
+position: absolute;
+font-size: 40px;
+top: 25%;
+left: 20%;</pre>
+            <button id="check">Проверить</button>
+            <textarea id="your-code" rows="2"></textarea>
+            <pre id="my-code-2">}</pre>
+        </div>
+        <div id="secret"></div>
+    </section>
+    <div class="container" style="position: relative;">
+        <section id="visuals" style="background-color: papayawhip; width: 675px;">
+            <div class="text-image" style="width: 200px; height: 200px; border-radius: 0px; position: absolute; left: 40%; top: 40%; border: 5px dashed crimson;"></div>
+            <div id="edit-text" style="width: 190px; height: 190px; border: 5px dashed darkgoldenrod; position: absolute; font-size: 40px; top: 25%; left: 20%;">
+                 тексттекст<br>
+                 тексттекст<br>
+                 тексттекст<br>
+                 тексттекст<br>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="game-script.js"></script>
+<script>
+    getAnswer(9, "edit-text");
+</script>
+</body>
+</html>

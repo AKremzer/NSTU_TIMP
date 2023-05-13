@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSStudy</title>
+  <link rel="stylesheet" href="game-styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <section id="task">
+    <div id="header">
+      <h1>CSStudy</h1>
+      <div id="user">
+        <div style="display:flex; align-items: center">
+          <div class="square-container">
+            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+          </div>
+          <p style="color:white" id="userlog">User</p>
+        </div>
+        <button class="signout" id="signoutbut">Выход</button>
+      </div>
+    </div>
+    <div id="theme-block">
+      <div id="theme">
+        <h2 id="theme-name">4. Текст. Выравнивание</h2>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <p id="levelof20">1/20</p>
+      <div id="navigation">
+        <button class="gobutton back" id="back"></button>
+        <p style="padding: 1vw; color:white">Уровень</p>
+        <button class="gobutton forward" id="forward"></button>
+      </div>
+    </div>
+    <p>
+      Для выравнивания текста по горизонтали используется свойство <span class="code">text-align</span>. Значениями этого свойства иогут быть:<br>
+      <span class="code">left</span>: выравнивание по левому краю.<br>
+      <span class="code">right</span>: выравнивание по правому краю.<br>
+      <span class="code">center</span>: выравнивание по центру.<br>
+      <span class="code">justify</span>: выравнивание текста по ширине элемента.<br><br>
+      Свойство <span class="code">text-align-last</span> позволяет определить отдельное выравнивание для последней строки текста. Значения
+      этого свойства совпадают со значениями <span class="code">text-align</span>.<br><br>
+      Для выравнивания текста или элементов по вертикали относительно соседних элементов используется свойство <span class="code">vertical-align</span>. Некоторые значения этого свойства:<br>
+      <span class="code">top</span>: выравнивание по верхней границе элемента.<br>
+      <span class="code">middle</span>: выравнивание по середине элемента.<br>
+      <span class="code">bottom</span>: выравнивание по нижней границе элемента.<br>
+      <span class="code">baseline</span>: выравнивание по базовой линии элемента.<br><br>
+    </p>
+    <p>
+      Некоторые языки требуют написания справа налево. За это отвечает свойство <span class="code">direction</span>, значение по умолчанию для которого - ltr (слева направо),
+      rtl же выставляет направление текста справа налево. В комбинации с <span class="code">unicode-bidi: bidi-override;</span> это свойство позволяет добиться "перевернутого текста".<br><br>
+      В рабочей области - детская загадка, но ответ слишком хорошо виден. Задайте ответу размер в 1em, чтобы сделать его меньше, сделайте выравнивание по правому краю и измените направление текста
+      с помощью <span class="code">direction</span> и <span class="code">unicode-bidi</span>.<br><br>
+    </p>
+    <div class="code-editor" id="code-editor">
+      <div class="numbers">
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+      </div>
+      <pre id="my-code-1">#edit-text {
+text-align: center;
+height: 50px;
+width: 300px;
+font-size: 1.5em;
+font-family: 'Exo 2', sans-serif;</pre>
+      <button id="check">Проверить</button>
+      <textarea id="your-code" rows="4"></textarea>
+      <pre id="my-code-2">}</pre>
+    </div>
+    <div id="secret"></div>
+  </section>
+  <section id="visuals" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background-image: url('images/question.avif');">
+      <div id="text" style="text-align: center; height: 200px; width: 400px; font-size: 2em; font-weight: bold; font-family: 'Exo 2', sans-serif;">
+        Он красивый, как огонь, <br>
+        С чёрными полосками, <br>
+        Очень грозные клыки, <br>
+        Лапы, когти — велики! <br>
+      </div>
+      <div id="edit-text" style="text-align: center; height: 50px; width: 300px; font-size:1.5em; font-family: 'Exo 2', sans-serif;">
+        Тигр
+      </div>
+  </section>
+</div>
+<script src="game-script.js"></script>
+<script>
+  getAnswer(4, "edit-text");
+</script>
+</body>
+</html>

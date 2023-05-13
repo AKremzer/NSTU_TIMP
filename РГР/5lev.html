@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSStudy</title>
+  <link rel="stylesheet" href="game-styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <section id="task">
+    <div id="header">
+      <h1>CSStudy</h1>
+      <div id="user">
+        <div style="display:flex; align-items: center">
+          <div class="square-container">
+            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+          </div>
+          <p style="color:white" id="userlog">User</p>
+        </div>
+        <button class="signout" id="signoutbut">Выход</button>
+      </div>
+    </div>
+    <div id="theme-block">
+      <div id="theme">
+        <h2 id="theme-name">5. Текст. Эффекты</h2>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <p id="levelof20">1/20</p>
+      <div id="navigation">
+        <button class="gobutton back" id="back"></button>
+        <p style="padding: 1vw; color:white">Уровень</p>
+        <button class="gobutton forward" id="forward"></button>
+      </div>
+    </div>
+    <p>
+     Свойство <span class="code">text-decoration</span> отвечает за декоративную линию в тексте, будь это подчеркивание, зачеркивание или росчерк над символом.
+      <span class="code">text-decoration</span> позволяет одной строкой задать следующие <span style="color: white">свойства декоративной линии:</span><br><br>
+      <span class="code">text-decoration-line</span>: вид декоративной линии. Так, <span class="code">underline</span> задает подчеркивание, а
+      <span class="code">line-through</span> - зачеркивание. Несколько типов линии можно комбинировать, чтобы получить несколько линий:
+      <span class="code">text-decoration-line: underline overline</span> позволит получить подчеркнутую сверху и снизу строку текста.<br>
+      <span class="code">text-decoration-color</span> задает цвет декоративной линии. Цвет можно задать любым изученным способом.<br>
+      <span class="code">text-decoration-style</span> позволяет задать внешний вид линии.<br>
+    </p>
+    <div class="text-image" style="background-image: url('images/decstyle.png'); width: 600px; height: 450px;"></div>
+    <p>
+      <span class="code">text-decoration-thickness</span> позволяет задать толщину декоративной линии. Толщина задается доступными единицами размера. <br><br>
+      Еще один способ украшения текста - тень, задаваемая свойством <span class="code">text-shadow</span>. Синтаксис text-shadow состоит из 4 частей, из которых складывается тень:
+      смещение тени по горизонтали, смещение по вертикали, радиус размытия и цвет.
+    </p>
+    <div class="text-image" style="background-image: url('images/shadow.png'); width: 620px; height: 300px;"></div>
+    <p>
+      Можно задать и несколько теней для одного текста, перечислив значения внутри одного <span class="code">text-shadow</span> через запятую.
+      <br>Текст в рабочей области очень скучный, но с помощью новых свойств можно добавить ему декораций. Добавьте тексту подчеркивание пунктиром толщиной в 5 пикселей
+      и цветом hotpink. Затем, с помощью <span class="code">text-shadow</span>, наложите на этот текст три одинаковых тени со смещениями 0 по
+      вертикали и горизонтали, радиусом размытия 0.5em и цвета hotpink. Накладываясь друг на друга, тени дадут более яркий оттенок, сделав из текста
+      почти что неоновую вывеску. Сделайте это задание в две строки.<br><br>
+    </p>
+    <div class="code-editor" id="code-editor">
+      <div class="numbers">
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+      </div>
+      <pre id="my-code-1">#edit-text {
+text-align: center;
+height: 50px;
+width: 300px;
+font-size:1.5em;
+font-family: 'Exo 2', sans-serif;</pre>
+      <button id="check">Проверить</button>
+      <textarea id="your-code" rows="2"></textarea>
+      <pre id="my-code-2">}</pre>
+    </div>
+    <div id="secret"></div>
+  </section>
+  <section id="visuals" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: black;">
+    <div id="edit-text" style="text-align: center; height: 200px; width: 400px; font-size: 3em; font-family: 'Brush Script MT', 'Brush Script Std', cursive; color: white">
+      Welcome to Design 101!
+    </div>
+  </section>
+</div>
+<script src="game-script.js"></script>
+<script>
+  getAnswer(5, "edit-text");
+</script>
+</body>
+</html>
