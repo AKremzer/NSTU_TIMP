@@ -142,7 +142,7 @@ let back = document.getElementById('back');
 
 forward.addEventListener('click', () => {
     let page = window.location.pathname.split('/').pop();
-    let newlevel = parseInt(page[0]) + 1;
+    let newlevel = parseInt(page.match(/\d+/)[0]) + 1;
     if (newlevel <= userlevel)
     {
         window.location.href = newlevel + "lev.html";
@@ -162,7 +162,7 @@ forward.addEventListener('click', () => {
 
 back.addEventListener('click', () => {
     let page = window.location.pathname.split('/').pop();
-    let newlevel = parseInt(page[0]) - 1;
+    let newlevel = parseInt(page.match(/\d+/)[0]) - 1;
     if (newlevel > 0) {
         window.location.href = newlevel + "lev.html";
     }
@@ -181,4 +181,3 @@ function getAnswer(level, elemid) {
         }
     });
 }
-
