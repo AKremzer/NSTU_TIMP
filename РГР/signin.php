@@ -41,20 +41,19 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hashedPassword = $row['Password'];
         if (password_verify($password, $hashedPassword)) {
             setcookie('signtoken', $login, time() + 86400, '/');
-            echo "Authentication successful. You are now logged in.";
             $level = $row['Level'];
             $params = "?login=" . urlencode($login) . "&level=" . urlencode($level);
             $redirectUrl = $level . "lev.html";
-            header("Location: " . $redirectUrl . $params);
+            echo $redirectUrl;
             exit();
         }
         else {
-            echo "Authentication failed. Invalid login or password.";
+            echo "Неверный логин или пароль!";
             exit();
         }
     }
     else {
-        echo "Authentication failed. Invalid login or password.";
+        echo "Неверный логин или пароль!";
         exit();
     }
 }
