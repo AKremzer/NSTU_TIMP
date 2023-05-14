@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSStudy</title>
+  <link rel="stylesheet" href="game-styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <section id="task">
+    <div id="header">
+      <h1>CSStudy</h1>
+      <div id="user">
+        <div style="display:flex; align-items: center">
+          <div class="square-container">
+            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+          </div>
+          <p style="color:white" id="userlog">User</p>
+        </div>
+        <button class="signout" id="signoutbut">Выход</button>
+      </div>
+    </div>
+    <div id="theme-block">
+      <div id="theme">
+        <h2 id="theme-name">15. Flexbox. Wrap</h2>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <p id="levelof20">1/20</p>
+      <div id="navigation">
+        <button class="gobutton back" id="back"></button>
+        <p style="padding: 1vw; color:white">Уровень</p>
+        <button class="gobutton forward" id="forward"></button>
+      </div>
+    </div>
+    <p>
+      <span class="code">flex-wrap</span> задает расстановку элементов гибкого контейнера по нескольким строками главной оси. По умолчанию,
+      гибкие элементы располагаются в одну линию, пытаясь поместиться в ширину контейнера. Однако, когда гибкие элементы не могут вместиться в одну линию,
+      они могут переноситься на несколько линий в соответствии со значением свойства <span class="code">flex-wrap</span><br><br>
+      <span class="code">flex-wrap</span> имеет <span style="color:white;">3 возможных значения</span>:
+      1) <span class="code">nowrap</span> - значение по умолчанию, предотвращающее перенос элементов на несколько линий.<br>
+      2) <span class="code">wrap</span> - значение, позволяющее гибким элементам переноситься на несколько линий, когда они не помещаются в ширину контейнера.<br>
+      3) <span class="code">wrap-reverse</span> - аналогично wrap, но в обратном порядке.<br><br>
+    </p>
+    <div class="text-image" style="background-image: url('images/wrap.jpg'); width: 500px; height: 400px;"></div>
+    <p>
+      Свойство  <span class="code">flex-flow</span> позволяет одновременно задать значения для направления элементов и переноса их на следующую строку:
+      например, <span class="code">flex-flow: column wrap</span> выстроит элементы в колонку, элементы которой будут переноситься в следующую колонку при
+      переполнении контейнера.<br><br>
+      В рабочей области находится не 1, а 3 дома. Используя <span class="code">flex-flow</span>, укажите правильное направление и перенос, чтобы собрать их в изначальное
+      состояние в верхней части экрана.<br><br>
+    </p>
+    <div class="code-editor" id="code-editor">
+      <div class="numbers">
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+      </div>
+      <pre id="my-code-1">#container {
+width: 100%;
+height: 100%;
+display: flex;
+align-content: flex-start;
+</pre>
+      <button id="check">Проверить</button>
+      <textarea id="your-code" rows="1"></textarea>
+      <pre id="my-code-2">}</pre>
+    </div>
+    <div id="secret"></div>
+  </section>
+  <section id="visuals" style="background-color:  #f5f2ed; align-items: center; justify-content: center;">
+    <div id="container" style="width: 100%; height: 100%; display: flex; align-content: flex-start; flex-direction: column;">
+      <div class="house-wrap" style="background-image: url('images/house1.png'); width: 300px; height: 125px;"></div>
+      <div class="house-wrap" style="background-image: url('images/house1.png'); width: 300px; height: 125px;"></div>
+      <div class="house-wrap" style="background-image: url('images/house1.png'); width: 300px; height: 125px;"></div>
+      <div class="house-wrap" style="background-image: url('images/house2.png'); width: 300px; height: 84px;"></div>
+      <div class="house-wrap" style="background-image: url('images/house2.png'); width: 300px; height: 84px;"></div>
+      <div class="house-wrap" style="background-image: url('images/house2.png'); width: 300px; height: 84px;"></div>
+      <div class="house-wrap" style="background-image: url('images/house3.png'); width: 300px; height: 95px;"></div>
+      <div class="house-wrap" style="background-image: url('images/house3.png'); width: 300px; height: 95px;"></div>
+      <div class="house-wrap" style="background-image: url('images/house3.png'); width: 300px; height: 95px;"></div>
+    </div>
+  </section>
+</div>
+<script src="game-script.js"></script>
+<script>
+  getAnswer(15, "container");
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="main-page-styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+  <div class="background"></div>
+  <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;
+       background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),url('images/coding.jpg') no-repeat; background-size: cover;
+       background-position: center;">
+    <p style="text-align: center; padding: 50px; font-size: 2em;">Команда CSStudy поздравляет вас с прохождением 20-го уровня!<br><br>
+      Следите за нашими обновлениями, чтобы не пропустить новые темы :)
+    </p>
+    <button class="sub-button" id="signoutbut" style="width: fit-content; padding: 0 20px 0 20px">Вернуться на главную</button>
+  </div>
+<script>
+    $('#signoutbut').on('click', function() {
+        $.ajax({
+            url: 'signout.php',
+            type: 'GET',
+            success: function(response) {
+                window.location.replace(response);
+            }
+        });
+    });
+</script>
+</body>
+</html>

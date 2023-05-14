@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSStudy</title>
+  <link rel="stylesheet" href="game-styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <section id="task">
+    <div id="header">
+      <h1>CSStudy</h1>
+      <div id="user">
+        <div style="display:flex; align-items: center">
+          <div class="square-container">
+            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+          </div>
+          <p style="color:white" id="userlog">User</p>
+        </div>
+        <button class="signout" id="signoutbut">Выход</button>
+      </div>
+    </div>
+    <div id="theme-block">
+      <div id="theme">
+        <h2 id="theme-name">17. Grid. Введение</h2>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <p id="levelof20">1/20</p>
+      <div id="navigation">
+        <button class="gobutton back" id="back"></button>
+        <p style="padding: 1vw; color:white">Уровень</p>
+        <button class="gobutton forward" id="forward"></button>
+      </div>
+    </div>
+    <p>
+      В отличие от Flexbox, который работает в одной измерении (либо горизонтально, либо вертикально),
+      Grid Layout позволяет контролировать размещение элементов и по горизонтали, и по вертикали одновременно.
+      Отображение содержимого контейнера в виде сетки задает <span class="code">display: grid</span>. Сетка Grid состоит из
+      <span style="color:white;">следующих элементов:</span><br><br>
+      1) Строки (Rows) - горизонтальные линии элементов в сетке.<br>
+      2) Столбцы (Columns) - вертикальные линии элементов в сетке.<br>
+      3) Линии (Grid Lines) - линии сетки между строками (row lines) или столбцами (column lines). Отсчет линий начинается с границ сетки.<br>
+      4) Отступы (Gaps) - расстояние между каждым столбцом/строкой.<br>
+    </p>
+    <div class="text-image" style="background-image: url('images/grid.webp'); width: 503px; height: 485px;"></div>
+    <p>
+      Одним из преимуществ Grid является возможность создания сложных макетов с использованием повторяющихся паттернов, выделением
+      отдельных элементов сетки и так далее. Стоит понимать, что Grid - не просто жесткая двумерная конструкция, а мощный инструмент
+      позволяющий контролировать размещение множества объектов на одной странице.
+    </p>
+    <div class="text-image" style="background-image: url('images/gridtemp.png'); width: 630px; height: 350px;"></div>
+    <p>
+      Первые свойства, с которых начнется погружение в Grid - <span class="code">grid-column-start</span>, <span class="code">grid-column-end</span>,
+      <span class="code">grid-row-start</span> и <span class="code">grid-row-end</span>. Разберем каждое по порядку:<br><br>
+      1) <span class="code">grid-column-start</span> задает начало элемента на определенной линии между столбцами.<br>
+      2) <span class="code">grid-column-end</span> задает конец элемента на определенной линии между столбцами. Например,
+      в сетке 3х3 будет 4 линии столбцов, и при задании <span class="code">grid-row-start: 1</span>, <span class="code">grid-row-end: 3;</span>
+      элемент займет 2 ячейки сетки в первой строке.<br>
+      3) <span class="code">grid-row-start</span> задает начало элемента на определенной линии между строками.<br>
+      4) <span class="code">grid-row-end</span> задает конец элемента на определенной линии между строками.<br><br>
+      Используя эти свойства, сделайте так, чтобы в выделенной области все место занимала одна ячейка, а не 3.<br><br>
+    </p>
+    <div class="code-editor" id="code-editor">
+      <div class="numbers">
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+      </div>
+      <pre id="my-code-1">#cell {
+background-color: white;
+text-align: center;
+padding: 20px 0;
+</pre>
+      <button id="check">Проверить</button>
+      <textarea id="your-code" rows="2"></textarea>
+      <pre id="my-code-2">}</pre>
+    </div>
+    <div id="secret"></div>
+  </section>
+  <section id="visuals" style="display: flex; align-items: center; justify-content: center; background-size: contain">
+    <div id="grid-container">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div id="cell"></div>
+    </div>
+    <div style="position: absolute; top: 60%; background-color: transparent; border: 5px dashed brown; width: 37vw; height: 19vh;"></div>
+  </section>
+</div>
+<script src="game-script.js"></script>
+<script>
+  getAnswer(17, "cell");
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSStudy</title>
+  <link rel="stylesheet" href="game-styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <section id="task">
+    <div id="header">
+      <h1>CSStudy</h1>
+      <div id="user">
+        <div style="display:flex; align-items: center">
+          <div class="square-container">
+            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+          </div>
+          <p style="color:white" id="userlog">User</p>
+        </div>
+        <button class="signout" id="signoutbut">Выход</button>
+      </div>
+    </div>
+    <div id="theme-block">
+      <div id="theme">
+        <h2 id="theme-name">14. Flexbox. Введение</h2>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <p id="levelof20">1/20</p>
+      <div id="navigation">
+        <button class="gobutton back" id="back"></button>
+        <p style="padding: 1vw; color:white">Уровень</p>
+        <button class="gobutton forward" id="forward"></button>
+      </div>
+    </div>
+    <p>
+       <span style="color:white;">CSS Flexbox</span> - одна из технологий, позволяющих создание сложных макетов страниц. Flexbox работает на основе двух основных компонентов: контейнера (flex container)
+       и его дочерних элементов (flex items). Контейнер определяет контекст, в котором дочерние элементы будут размещаться, а дочерние элементы определяют, как они
+      будут распределяться и выравниваться внутри контейнера.Контейнер становится гибким при назначении ему свойства <span class="code">display: flex;</span><br><br>
+    </p>
+    <div class="text-image" style="background-image: url('images/flex.png'); width: 500px; height: 300px;"></div>
+    <p>
+      <span style="color:white;">Основные свойства гибкого контейнера:</span><br><br>
+      1) <span class="code">flex-direction</span> - определяет направление, в котором располагаются элементы контейнера.<br>
+      2) <span class="code">flex-wrap</span> - определяет, допустим ли перенос элементов на следующую строку.<br>
+      3) <span class="code">flex-flow</span> - объединяет свойства <span class="code">flex-direction</span> и <span class="code">flex-wrap</span>.<br>
+      4) <span class="code">justify-content</span> - расположение элементов контейнера.<br>
+      5) <span class="code">align-items</span> - расположение элементов контейнера.<br>
+      6) <span class="code">align-content</span> - вертикальное расположение линий элементов контейнера.<br><br>
+      Свойство, с которого начнется введение в Flexbox - <span class="code">flex-direction</span>. Направление элементов может принимать значения:<br><br>
+      1) <span class="code">row</span> - элементы располагаются в строку.<br>
+      2) <span class="code">row-reverse</span> - элементы располагаются в строку, но наоборот.<br>
+      3) <span class="code">column</span> - элементы располагаются в столбец.<br>
+      4) <span class="code">column-reverse</span> - элементы располагаются в столбец, но наоборот.<br><br>
+      Используя свойство <span class="code">flex-direction</span>, соберите дом в правильном порядке.<br><br>
+    </p>
+    <div class="code-editor" id="code-editor">
+      <div class="numbers">
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+      </div>
+      <pre id="my-code-1">#container {
+width: 100%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;</pre>
+      <button id="check">Проверить</button>
+      <textarea id="your-code" rows="1"></textarea>
+      <pre id="my-code-2">}</pre>
+    </div>
+    <div id="secret"></div>
+  </section>
+  <section id="visuals" style="background-color:  #f5f2ed; align-items: center; justify-content: center;">
+    <div id="container" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+      <div class="text-image" style="background-image: url('images/house3.png'); width: 300px; height: 95px; border-radius: 0; padding: 0; margin: 0;"></div>
+      <div class="text-image" style="background-image: url('images/house2.png'); width: 300px; height: 70px; border-radius: 0; padding: 0; margin: 0;"></div>
+      <div class="text-image" style="background-image: url('images/house1.png'); width: 300px; height: 125px; border-radius: 0; padding: 0; margin: 0;"></div>
+    </div>
+  </section>
+</div>
+<script src="game-script.js"></script>
+<script>
+  getAnswer(14, "container");
+</script>
+</body>
+</html>

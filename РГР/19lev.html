@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSStudy</title>
+  <link rel="stylesheet" href="game-styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <section id="task">
+    <div id="header">
+      <h1>CSStudy</h1>
+      <div id="user">
+        <div style="display:flex; align-items: center">
+          <div class="square-container">
+            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+          </div>
+          <p style="color:white" id="userlog">User</p>
+        </div>
+        <button class="signout" id="signoutbut">Выход</button>
+      </div>
+    </div>
+    <div id="theme-block">
+      <div id="theme">
+        <h2 id="theme-name">19. Grid Areas</h2>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <p id="levelof20">1/20</p>
+      <div id="navigation">
+        <button class="gobutton back" id="back"></button>
+        <p style="padding: 1vw; color:white">Уровень</p>
+        <button class="gobutton forward" id="forward"></button>
+      </div>
+    </div>
+    <p>
+      Каждому элементу, содержащемуся в сетке, может быть присвоено название области с помощью <span class="code">grid-area</span>. Размещение
+      именованных зон на сетке происходит в элементе контейнера с помощью свойства <span class="code">grid-template-areas</span>.<br><br>
+      Когда в элементе определяется <span class="code">grid-template-areas</span>, создается сетка из ячеек, где каждая ячейка представляет собой область.
+      Затем для каждой ячейки может быть назначено название области, для чего нужно указать расположение области в сетке.
+      Это делается с помощью значений, представляющих имена областей, разделенных пробелами или символами, представляющими пустое пространство.
+      Каждое значение соответствует одной ячейке в сетке. <span class="code">grid-template-areas</span> позволяет гибко управлять содержимым сетки.
+    </p>
+    <div class="text-image" style="background-image: url('images/grid-areas.png'); width: 600px; height: 500px;"></div>
+    <p>
+      Вам пришел макет сайта с обозначением именованных зон. Используйте <span class="code">grid-template-areas</span>, чтобы в точности
+      отобразить его в рабочей области.<br><br>
+    </p>
+    <div class="text-image" style="background-image: url('images/macket.png'); width: 500px; height: 400px;"></div>
+    <br><br>
+    <div class="code-editor" id="code-editor">
+      <div class="numbers">
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+      </div>
+      <pre id="my-code-1">#grid-container {
+background-color: #180B2B;
+grid-template-columns: 1fr 1fr 1fr 1fr;
+grid-template-rows: 1fr 1fr 1fr 1fr;</pre>
+      <button id="check">Проверить</button>
+      <textarea id="your-code" rows="5"></textarea>
+      <pre id="my-code-2">}</pre>
+    </div>
+    <div id="secret"></div>
+  </section>
+  <section id="visuals" style="display: flex; background-color: white; align-items: center; justify-content: center; background-size: contain">
+    <div id="grid-container" style="background-color: #180B2B; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr 1fr;">
+      <div class="item1" style="background-color: #f25f4c;"></div>
+      <div class="item2" style="background-color: dimgrey;"></div>
+      <div class="item3" style="background-color: white;"></div>
+      <div class="item4" style="background-color:  #a7a9be"></div>
+    </div>
+  </section>
+</div>
+<script src="game-script.js"></script>
+<script>
+  getAnswer(19, "grid-container");
+</script>
+</body>
+</html>

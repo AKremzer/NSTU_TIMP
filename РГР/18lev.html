@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSStudy</title>
+  <link rel="stylesheet" href="game-styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <section id="task">
+    <div id="header">
+      <h1>CSStudy</h1>
+      <div id="user">
+        <div style="display:flex; align-items: center">
+          <div class="square-container">
+            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+          </div>
+          <p style="color:white" id="userlog">User</p>
+        </div>
+        <button class="signout" id="signoutbut">Выход</button>
+      </div>
+    </div>
+    <div id="theme-block">
+      <div id="theme">
+        <h2 id="theme-name">18. Grid. Формат строк и столбцов.</h2>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <p id="levelof20">1/20</p>
+      <div id="navigation">
+        <button class="gobutton back" id="back"></button>
+        <p style="padding: 1vw; color:white">Уровень</p>
+        <button class="gobutton forward" id="forward"></button>
+      </div>
+    </div>
+    <p>
+      Определять структуру сетки более расширенно можно с помощью <span style="color: white">следующих свойств:</span><br><br>
+      1) <span class="code">grid-template-rows</span> позволяет определить размеры и распределение строк в сетке. Размеры каждой строки можно задать
+      явно, используя конкретные значения (например, 100px, 50%), или использовать ключевые слова (например, auto, min-content, max-content) для динамического определения
+      размеров строк в зависимости от содержимого.<br>
+      2) <span class="code">grid-template-columns</span> работает аналогично предыдущему свойству, но уже для строк.<br><br>
+      Количество перечисленных значений этих свойств задаст количество строк/столбцов. Для обозначения размера столбцов/строк также часто используется единица fr - фракционная единица,
+      равная 1 части доступного пространства в сетке.
+    </p>
+    <div class="text-image" style="background-image: url('images/gridtemplate.png'); width: 750px; height: 320px;"></div>
+    <p>
+      Свойства выравнивания содержимого контейнера <span class="code">justify-content</span> и <span class="code">align-content</span> также работают для сеток.
+      Принципы работы данных свойств с различными значениями аналогичны пройденным ранее в пункте 16.<br><br>
+      Используя только <span class="code">grid-template-rows</span> и <span class="code">grid-template-columns</span>, сделайте сетку, соответствующую следующим требованиям:<br>
+      1) Количество столбцов - 4, все одинакового размера (используйте фракционную единицу).<br>
+      2) Количество строк - 2, первая должна занимать 30% сетки, а вторая - 60%.<br>
+      3) Оставшиеся 10% места в сетке должны быть распределены равномерно по вертикали (используйте одно из свойств с прошлых уровней).<br><br>
+      В результате получится сетка в форме окна :)<br><br>
+    </p>
+    <div class="code-editor" id="code-editor">
+      <div class="numbers">
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+      </div>
+      <pre id="my-code-1">#grid-container {
+background-color: saddlebrown;
+width: 90%;
+height: 60%;
+gap: 10px;
+padding: 20px;</pre>
+      <button id="check">Проверить</button>
+      <textarea id="your-code" rows="3"></textarea>
+      <pre id="my-code-2">}</pre>
+    </div>
+    <div id="secret"></div>
+  </section>
+  <section id="visuals" style="display: flex; align-items: center; justify-content: center; background-size: contain">
+    <div id="grid-container" style="background-color: saddlebrown">
+      <div style="background-color: powderblue"></div>
+      <div style="background-color: powderblue"></div>
+      <div style="background-color: powderblue"></div>
+      <div style="background-color: powderblue"></div>
+      <div style="background-color: powderblue"></div>
+      <div style="background-color: powderblue"></div>
+      <div style="background-color: powderblue"></div>
+      <div style="background-color: powderblue" id="cell"></div>
+    </div>
+  </section>
+</div>
+<script src="game-script.js"></script>
+<script>
+  getAnswer(18, "grid-container");
+</script>
+</body>
+</html>

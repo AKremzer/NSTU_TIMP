@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSStudy</title>
+  <link rel="stylesheet" href="game-styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <section id="task">
+    <div id="header">
+      <h1>CSStudy</h1>
+      <div id="user">
+        <div style="display:flex; align-items: center">
+          <div class="square-container">
+            <img src="images/user-solid-24.png" alt="User Image" class="user-icon">
+          </div>
+          <p style="color:white" id="userlog">User</p>
+        </div>
+        <button class="signout" id="signoutbut">Выход</button>
+      </div>
+    </div>
+    <div id="theme-block">
+      <div id="theme">
+        <h2 id="theme-name">20. Бонус: Developer Tools</h2>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <p id="levelof20">1/20</p>
+      <div id="navigation">
+        <button class="gobutton back" id="back"></button>
+        <p style="padding: 1vw; color:white">Уровень</p>
+        <button class="gobutton forward" id="forward"></button>
+      </div>
+    </div>
+    <p>
+      <span style="color: white;">Инструменты разработчика (Developer Tools)</span> предоставляют мощный набор инструментов для разработки и отладки веб-страниц.
+      Доступ к Developer Tools можно получить из меню при нажатии правой кнопкой мыши в любом месте веб-страницы, в пункте Исследовать элемент/Просмотреть код или
+      похожем.<br><br>
+      С помощью интсрументов разработчика вы можете исследовать и модифицировать CSS-свойства,
+      просматривать стили элементов, отображать изменения в реальном времени и многое другое.
+      Это существенно упрощает процесс разработки и отладки CSS, позволяя вам экспериментировать с различными стилями, оптимизировать внешний вид вашей веб-страницы
+      и решать возникающие проблемы с оформлением.<br><br>
+      Для того, чтобы просмотреть стили, применяемые к элементу на странице, необходимо открыть инструменты разработчика на интересующей странице, нажать на нужный элемент в HTML-коде
+      страницы, после чего в нижней части инструментов разработчика появится вкладка со всеми стилями, действующими на объект.<br>
+    </p>
+    <div class="text-image" style="background-image: url('images/devtools.png'); width: 600px; height: 350px;"></div>
+    <p>
+      Данный урок - завершающий, поэтому задание будет простым. С помощью Developer Tools исследуйте HTML этой страницы и найдите элемент с
+      id "findme". Два свойства этого элемента мешают ему появиться в рабочей области - одно из этих свойств должно быть приведено к значению по
+      умолчанию для элемента данного типа, а подсказка к значению второго содержится рядом с местонахождением findme.<br><br>
+    </p>
+    <div class="code-editor" id="code-editor">
+      <div class="numbers">
+        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+      </div>
+      <pre id="my-code-1">#findme {
+???</pre>
+      <button id="check">Проверить</button>
+      <textarea id="your-code" rows="2"></textarea>
+      <pre id="my-code-2">}</pre>
+    </div>
+    <div id="secret"></div>
+  </section>
+  <section id="visuals" style="display: flex; background-color: white; align-items: center; justify-content: center; background-size: contain">
+    <div id="findme" style="display: none; font-color: white; font-family: 'Brush Script MT', 'Brush Script Std', cursive; font-size: 2.5em;">
+      DevTools are the best!
+    </div>
+    <div id="openme" style="font-color: white; display: none;">Для того, чтобы задание зачлось, цвет текста в элементе выше должен быть черным ;)</div>
+  </section>
+</div>
+<script src="game-script.js"></script>
+<script>
+  getAnswer(20, "findme");
+</script>
+</body>
+</html>
