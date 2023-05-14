@@ -45,6 +45,7 @@ let checkfunc = function() {
     {
         let array = JSON.parse(answer);
         let divstyle = divelem.style.cssText;
+
         for (const [property, value] of array) {
             let regex = new RegExp("\\b" + property + "\\s*:\\s*(.*?)(;|$)");
             let match = divstyle.match(regex);
@@ -59,26 +60,34 @@ let checkfunc = function() {
                 return;
             }
         }
+
         let login = getCookieValue('signtoken');
         $.ajax({
             url: 'progress.php',
             type: 'POST',
             data: { winlogin: login },
             success: async function(response) {
-                levelof20.innerHTML = response + "/20";
-                updateProgressBar(response);
-                userlevel = parseInt(response);
-                document.body.insertAdjacentHTML("afterbegin", "<div id=\"loading-overlay\">\n" +
-                    "<svg class=\"checkmark\" + xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 52 52\">" +
-                    "   <circle class=\"checkmark__circle\" cx=\"26\" cy=\"26\" r=\"25\" fill=\"none\"/> " +
-                    "   <path class=\"checkmark__check\" fill=\"none\" d=\"M14.1 27.2l7.1 7.2 16.7-16.8\"/>\n" +
-                    "</svg>\n" +
-                    "<span id=\"done\">Пункт пройден!</span>\n" +
-                    "</div>");
+                if (response != "win") {
+                    levelof20.innerHTML = `${response}/20`;
+                    updateProgressBar(response);
+                    userlevel = parseInt(response);
+                }
+
+                document.body.insertAdjacentHTML("afterbegin", `
+                <div id="loading-overlay">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                         <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                         <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                    <span id="done">Пункт пройден!</span>
+                </div>
+                `);
+
                 await sleep(2000);
                 document.body.classList.add('page-transition');
                 setTimeout(function() {
-                    window.location.href = response + "lev.html";
+                    let redirectUrl = response !== "win" ? `${response}lev.html` : "win.html";
+                    window.location.href = redirectUrl;
                 }, 500);
             }
         });
@@ -88,9 +97,11 @@ let checkfunc = function() {
 checkbut.addEventListener('click', checkfunc);
 function updateProgressBar(level) {
     let progress = (level / 20) * 100;
-    var progressBarFill = document.getElementById("progress-bar-fill");
-    progressBarFill.style.width = progress + "%";
+    let progressBarFill = document.getElementById("progress-bar-fill");
+
+    progressBarFill.style.width = `${progress}%`;
     progressBarFill.style.backgroundColor = "#f25f4c";
+
     let page = window.location.pathname.split('/').pop();
     let pagenum = parseInt(page.match(/\d+/)[0]);
     if(pagenum < level)
@@ -113,7 +124,7 @@ function getCookieValue(cookieName) {
 
 $(document).ready(function () {
     const signtoken = getCookieValue('signtoken');
-    userlog.innerHTML = signtoken;
+    $('#userlog').html(signtoken);
     $.ajax({
         url: 'progress.php',
         type: 'POST',
@@ -126,8 +137,7 @@ $(document).ready(function () {
     });
 });
 
-let signout = document.getElementById('signoutbut');
-signout.addEventListener('click', () => {
+$('#signoutbut').on('click', function() {
     $.ajax({
         url: 'signout.php',
         type: 'GET',
@@ -137,18 +147,13 @@ signout.addEventListener('click', () => {
     });
 });
 
-let forward = document.getElementById('forward');
-let back = document.getElementById('back');
-
-forward.addEventListener('click', () => {
+$('#forward').on('click', function() {
     let page = window.location.pathname.split('/').pop();
     let newlevel = parseInt(page.match(/\d+/)[0]) + 1;
     if (newlevel <= userlevel)
-    {
-        window.location.href = newlevel + "lev.html";
-    }
+        window.location.href = newlevel + 'lev.html';
     else {
-        document.getElementById('secret').scrollIntoView({
+        $('#secret').scrollIntoView({
             behavior: 'smooth',
             block: 'nearest',
             inline: 'end'
@@ -158,15 +163,15 @@ forward.addEventListener('click', () => {
             checkbut.classList.remove('shake');
         }, 1000);
     }
-})
+});
 
-back.addEventListener('click', () => {
+$('#back').on('click', function() {
     let page = window.location.pathname.split('/').pop();
     let newlevel = parseInt(page.match(/\d+/)[0]) - 1;
     if (newlevel > 0) {
-        window.location.href = newlevel + "lev.html";
+        window.location.href = newlevel + 'lev.html';
     }
-})
+});
 
 let answer = "";
 let divelem = "";

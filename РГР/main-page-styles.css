@@ -3,7 +3,7 @@
 .background {
     width: 100%;
     height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)), url('coding.jpg') no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)), url('images/coding.jpg') no-repeat;
     background-size: cover;
     background-position: center;
 
@@ -23,7 +23,7 @@ body {
     height: 80vh;
     min-width: 450px;
     min-height: 480px;
-    background: linear-gradient(rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.30)),url('coding.jpg') no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.30)),url('images/coding.jpg') no-repeat;
     background-size: cover;
     background-position: center;
     border-radius: 10px;

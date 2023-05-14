@@ -227,7 +227,7 @@ textarea {
     border: none;
     font-family: 'Exo 2', sans-serif;
     background-color: #f25f4c;
-    width: 9vw;
+    width: fit-content;
     text-align: center;
     height: 35px;
     border-radius: 3px;
@@ -322,3 +322,58 @@ textarea {
     margin-bottom: 10px;
 }
 
+.house-wrap {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    flex-basis: 33.33%;
+    padding: 0;
+    margin: 0;
+}
+
+.brick-wrap {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    flex-basis: 30%;
+    width: 120px;
+    height: 10vw;
+    padding: 0;
+    margin: 0;
+}
+
+#grid-container {
+    width: 90%;
+    height: 60%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+    background-color: goldenrod;
+    padding: 10px;
+}
+
+#grid-container > div {
+    background-color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.item1 {
+    grid-area: buttons;
+}
+
+.item2 {
+    grid-area: editor;
+}
+
+.item3 {
+    grid-area: backcolor;
+}
+
+.item4 {
+    grid-area: task;
+}
+
+#grid-container {
+
+}

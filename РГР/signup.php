@@ -44,4 +44,3 @@ if (strlen($newlogin) <= 60) {
 $conn->close();
 exit();
 ?>
-

@@ -41,13 +41,18 @@ elseif (isset($_POST['winlogin'])) {
     $stmt->fetch();
     $stmt->close();
 
-    $newLevel = $currentLevel + 1;
-    $updateQuery = "UPDATE users SET Level = ? WHERE Login = ?";
-    $updateStmt = $conn->prepare($updateQuery);
-    $updateStmt->bind_param("is", $newLevel, $login);
-    $updateStmt->execute();
-    $updateStmt->close();
-
-    echo $newLevel;
+    if ($currentLevel != 20) {
+        $currentLevel = $currentLevel + 1;
+        $updateQuery = "UPDATE users SET Level = ? WHERE Login = ?";
+        $updateStmt = $conn->prepare($updateQuery);
+        $updateStmt->bind_param("is", $currentLevel, $login);
+        $updateStmt->execute();
+        $updateStmt->close();
+        echo $currentLevel;
+    }
+    else {
+        echo "win";
+    }
+    $conn->close();
 }
 ?>

@@ -20,9 +20,8 @@ if (isset($_COOKIE['signtoken'])) {
     $setresult = $setstmt->get_result();
     $row = $setresult->fetch_assoc();
     $level = $row['Level'];
-    $params = "?login=" . urlencode($_COOKIE['signtoken']) . "&level=" . urlencode($level);
     $redirectUrl = $level . "lev.html";
-    echo $redirectUrl . $params;
+    echo $redirectUrl;
     exit();
 }
 
@@ -42,7 +41,6 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (password_verify($password, $hashedPassword)) {
             setcookie('signtoken', $login, time() + 86400, '/');
             $level = $row['Level'];
-            $params = "?login=" . urlencode($login) . "&level=" . urlencode($level);
             $redirectUrl = $level . "lev.html";
             echo $redirectUrl;
             exit();
