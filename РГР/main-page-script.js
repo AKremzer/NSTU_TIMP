@@ -2,7 +2,7 @@ $('.sign-in-form').submit(function (e) {
     e.preventDefault();
     let formData = $(this).serialize();
     $.ajax({
-        url: 'signin.php',
+        url: 'server/signin.php',
         type: 'POST',
         data: formData,
         success: function(response) {
@@ -17,7 +17,7 @@ $('.sign-up-form').submit(function (e) {
     e.preventDefault();
     let formData = $(this).serialize();
     $.ajax({
-        url: 'signup.php',
+        url: 'server/signup.php',
         type: 'POST',
         data: formData,
         success: function(response) {
@@ -44,7 +44,7 @@ function isCookieSet(cookieName) {
 $(document).ready(function () {
     if(isCookieSet("signtoken")) {
         $.ajax({
-            url: 'signin.php',
+            url: 'server/signin.php',
             type: 'GET',
             success: async function(response) {
                 if(response.includes("lev")) {

@@ -63,7 +63,7 @@ let checkfunc = function() {
 
         let login = getCookieValue('signtoken');
         $.ajax({
-            url: 'progress.php',
+            url: 'server/progress.php',
             type: 'POST',
             data: { winlogin: login },
             success: async function(response) {
@@ -126,7 +126,7 @@ $(document).ready(function () {
     const signtoken = getCookieValue('signtoken');
     $('#userlog').html(signtoken);
     $.ajax({
-        url: 'progress.php',
+        url: 'server/progress.php',
         type: 'POST',
         data: { signtoken: signtoken },
         success: function(response) {
@@ -139,7 +139,7 @@ $(document).ready(function () {
 
 $('#signoutbut').on('click', function() {
     $.ajax({
-        url: 'signout.php',
+        url: 'server/signout.php',
         type: 'GET',
         success: function(response) {
             window.location.replace(response);
@@ -178,7 +178,7 @@ let divelem = "";
 function getAnswer(level, elemid) {
     divelem = document.getElementById(elemid);
     $.ajax({
-        url: 'answers.php',
+        url: 'server/answers.php',
         type: 'POST',
         data: { level: level },
         success: function(response) {

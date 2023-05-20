@@ -23,7 +23,7 @@
         </div>
         <div id="theme-block">
             <div id="theme">
-                <h2 id="theme-name">10. Размеры</h2>
+                <h2 id="theme-name">11. Границы</h2>
             </div>
             <div class="progress-bar">
                 <div id="progress-bar-fill" class="progress-bar-fill"></div>
@@ -36,18 +36,19 @@
             </div>
         </div>
         <p>
-            Размеры содержимого элемента задаются с помощью <span class="code">width</span> и <span class="code">height</span>. Значение по умолчанию для длины и ширины -
-            <span class="code">auto</span>, при этом браузер самостоятельно вычисляет размеры содержимого. Размеры могут быть заданы с помощью любых единиц, пройденных в пункте
-            7.<br><br>
-            <span class="code">max-width</span> и <span class="code">max-height</span> задают максимальные значения для ширины и высоты элемента. Обратные им свойства -
-            <span class="code">min-width</span> и <span class="code">min-height</span>. Задание этих свойств полезно при использовании, к примеру, относительных единиц размера,
-            которые позволяют ширине и длине расти неограниченно.<br>
+            Границы <span class="code">border</span> - последний компонент блочной модели, который будет рассмотрен. <span class="code">border</span> задает "рамку" вокруг элемента, каждая
+            из сторон которой может быть настроена отдельно с помощью свойств <span class="code">border-left</span>, <span class="code">border-right</span>, <span class="code">border-top</span>
+            и <span class="code">border-bottom</span>. Каждое из этих свойств является сокращенным способом задания 3 <span style="color: white">основных свойств границы: </span><br><br>
+            1) <span class="code">border-width</span> задает толщину границы. Толщина может быть задана в любых единицах из пункта 7.<br>
+            2) <span class="code">border-style</span> задает стиль границы. Доступные стили приведены ниже
         </p>
+        <div class="text-image" style="background-image: url('images/common-border-style-types.png'); width: 500px; height: 250px;"></div>
         <p>
-            Необходимо помнить, что <span class="code">width</span> и <span class="code">height</span> задают только размеры содержимого, но не самого элемента. На размер элемента
-            также влияют <span class="code">padding</span> и <span class="code">margin</span>. Принимая во внимание значение <span class="code">padding</span> в коде ниже, установите
-            <span class="code">width</span> и <span class="code">height</span>, чтобы получить нужный размер элемента. Порядок расположения значений <span class="code">padding</span>:
-            top, right, bottom, left.<br><br>
+            3) <span class="code">border-color</span> задает цвет границы. Цвет может быть задан любым способом из приведенных в пунктах 1-2.<br><br>
+            На границу элемента влияет <span class="code">padding</span>, но не <span class="code">margin</span>, так как она находится между двумя этими компонентами.<br>
+            Все свойства, входящие в <span class="code">border</span>, имеют значение по умолчанию, поэтому необязательно указывать значения всех свойств. Однако, для того,
+            чтобы граница стала видимой, обязательным свойством для задания является <span class="code">border-style</span> (значением по умолчанию для него является none).<br><br>
+            Картина, которую вы вешали на стену, лишилась рамки. Подберите стиль границы, больше всего напоминающий выступающую раму, толщиной в 20 пикселей и цветом sienna.<br><br>
         </p>
         <div class="code-editor" id="code-editor">
             <div class="numbers">
@@ -66,17 +67,9 @@ padding: 10px 20px 10px 30px;</pre>
         </div>
         <div id="secret"></div>
     </section>
-    <div class="container" style="position: relative;">
-        <section id="visuals" style="background-color: papayawhip; width: 675px;">
-            <span style="color: crimson; position: absolute; left: 20%; top: 21%; font-family: 'Exo 2', sans-serif; font-size: 20px; font-weight: bold">Желаемый размер: 480x360px</span>
-            <div class="text-image" style="width: 480px; height: 360px; border-radius: 0px; position: absolute; left: 20%; top: 25%; border: 5px dashed crimson;"></div>
-            <div id="edit-text" style="width: 200px; height: 200px; border: 5px dashed darkgoldenrod; position: absolute;
-      font-size: 40px; top: 25%; left: 20%; overflow-wrap: break-word; overflow: hidden; padding: 10px 20px 10px 30px;">
-                тексттексттексттексттексттексттексттексттексттексттексттексттексттексттексттексттексттексттекст
-                тексттексттексттексттексттексттексттексттексттексттексттексттексттексттек
-            </div>
-        </section>
-    </div>
+    <section id="visuals" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #f0e7d8;">
+        <div class="text-image" id="edit-text" style="background-image: url('images/paintingnude.png'); width: 214px; height: 143px; border-radius: 0;"></div>
+    </section>
 </div>
 <script src="game-script.js"></script>
 <script>

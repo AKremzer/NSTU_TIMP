@@ -19,7 +19,7 @@
 <script>
     $('#signoutbut').on('click', function() {
         $.ajax({
-            url: 'signout.php',
+            url: 'server/signout.php',
             type: 'GET',
             success: function(response) {
                 window.location.replace(response);
